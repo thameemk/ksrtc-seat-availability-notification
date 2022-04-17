@@ -9,6 +9,8 @@ python-decouple = "*"
 beartype = "*"
 
 [dev-packages]
+flake8 = "*"
+flake8-annotations = "*"
 
 [requires]
 python_version = "3.10"

@@ -1,0 +1,6 @@
+[flake8]
+
+# ANN101 - Missing type annotation for self in method
+
+ignore=ANN101
+# exclude = __init__.py
