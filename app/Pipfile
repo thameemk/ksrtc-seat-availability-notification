@@ -9,6 +9,7 @@ python-decouple = "*"
 beartype = "*"
 beautifulsoup4 = "*"
 requests = "*"
+lxml = "*"
 
 [dev-packages]
 flake8 = "*"
