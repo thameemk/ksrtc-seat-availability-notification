@@ -10,6 +10,7 @@ beartype = "*"
 beautifulsoup4 = "*"
 requests = "*"
 lxml = "*"
+fireo = "*"
 
 [dev-packages]
 flake8 = "*"
