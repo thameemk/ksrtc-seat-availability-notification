@@ -3,11 +3,9 @@
 #  Author : blacklist
 #  Current modification time : Sun, 17 Apr 2022 at 11:14 PM India Standard Time
 #  Last modified time : Sun, 17 Apr 2022 at 11:14 PM India Standard Time
-import json
 import re
 
 import requests
-
 from bs4 import BeautifulSoup
 
 # from settings import KSRTC_HOME_URL
@@ -17,7 +15,7 @@ KSRTC_HOME_URL = "https://online.keralartc.com/oprs-web/"
 
 class KSRTCServiceLocations:
 
-    def __init__(self):
+    def __init__(self) -> None:
         r = requests.get(KSRTC_HOME_URL, headers={'User-Agent': 'Mozilla/5.0'})
         if r.status_code == 200:
             soup = BeautifulSoup(r.content, 'lxml')
@@ -26,7 +24,7 @@ class KSRTCServiceLocations:
             pattern = re.search(r'jsondata\s*=\s*(.*?}])\s*\n', locations, flags=re.DOTALL)
             # m = pattern.match(locations)
             # stocks = json.loads(m.groups()[0])
-            a = pattern
+            print(pattern)
         else:
             raise Exception(f"{r.status_code} - {r.reason}")
 
