@@ -12,6 +12,6 @@ jobs:
         with:
           python-version: "3.10"
       - name: Install requirements
-        uses: pip install flake8 flake8-annotations
+        run: pip install flake8 flake8-annotations
       - name: Check syntax
         run: flake8 --count --statistics --show-source
