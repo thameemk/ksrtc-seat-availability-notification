@@ -11,6 +11,6 @@ from fireo.models import Model
 class UserModel(Model):
     full_name = TextField(required=True)
     phone = NumberField(required=True)
-    is_active = BooleanField(required=True, default=False)
+    is_deleted = BooleanField(required=True, default=False)
     created_on = DateTime(required=True, default=pendulum.now().utcnow)
     modified_on = DateTime(required=True, default=pendulum.now().utcnow)
