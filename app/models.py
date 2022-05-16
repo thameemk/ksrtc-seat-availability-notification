@@ -1,3 +1,3 @@
 from django.db import models
 
-# Create your models here.
+# Create your firebase_db_models here.
