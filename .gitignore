@@ -129,3 +129,4 @@ dmypy.json
 .pyre/
 
 serviceAccountKey.json
+local.env
