@@ -9,6 +9,9 @@ from fireo.models import Model
 
 
 class ServiceLocationModel(Model):
+    class Meta:
+        collection_name = "service_locations"
+
     location_id = IDField(required=True)
     location_name = TextField(required=True)
     created_on = DateTime(required=True, default=pendulum.now().utcnow)

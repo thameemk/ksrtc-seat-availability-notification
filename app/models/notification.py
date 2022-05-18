@@ -11,6 +11,9 @@ from models import ServiceLocationModel, UserModel
 
 
 class NotificationModel(Model):
+    class Meta:
+        collection_name = "notifications"
+
     leaving_from = ReferenceField(ServiceLocationModel, required=True)
     going_to = ReferenceField(ServiceLocationModel, required=True)
     date_of_departure = DateTime(required=True)
