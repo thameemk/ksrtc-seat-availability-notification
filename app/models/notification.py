@@ -1,8 +1,9 @@
 #  Project : KSRTC Seat Availability Notification System
 #  Filename : notification.py
-#  Author : blacklist
-#  Current modification time : Sun, 15 May 2022 at 7:56 PM India Standard Time
-#  Last modified time : Sun, 15 May 2022 at 7:56 PM India Standard Time
+#  Author : thameem
+#  Current modification time : Thu, 19 May 2022 at 8:06 PM India Standard Time
+#  Last modified time : Wed, 18 May 2022 at 11:36 PM India Standard Time
+
 import pendulum
 from fireo.fields import ReferenceField, BooleanField, DateTime, NumberField
 from fireo.models import Model
