@@ -7,4 +7,5 @@ from django.shortcuts import render
 
 
 def login(request):
-    return render(request, 'login.html')
+    data = {'page_title': 'Login | KSRTC Seat Availability Notification'}
+    return render(request, 'login.html', data)
