@@ -6,7 +6,7 @@
 
 from datetime import datetime
 
-from fireo.fields import TextField, NumberField, DateTime, BooleanField, IDField
+from fireo.fields import TextField, NumberField, DateTime, BooleanField
 from fireo.models import Model
 
 
