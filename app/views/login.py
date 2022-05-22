@@ -10,10 +10,6 @@ from django.shortcuts import render
 
 
 class Login:
-    @staticmethod
-    @beartype
-    def login_action(request: WSGIRequest) -> 'HttpResponse':
-        return HttpResponse("Connection Successful")
 
     @staticmethod
     @beartype

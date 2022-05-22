@@ -24,6 +24,10 @@ window.onload = function () {
             // User is signed in.
             const uid = user.uid;
             const phoneNumber = user.phoneNumber;
+            const accessToken = user.getIdToken()
+            console.log(accessToken)
+
+            // window.location = '/user/home';
         }
     });
 
