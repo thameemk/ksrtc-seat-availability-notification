@@ -28,6 +28,12 @@
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="{% static 'css/site.min.css' %}">
 
+    <style>
+        .otp_container {
+            display: none;
+        }
+    </style>
+
 </head>
 <body class="theme-cyan font-montserrat">
 
@@ -56,14 +62,25 @@
         <div class="card">
             <div class="body">
                 <p class="lead">Login to your account</p>
-                <form class="form-auth-small m-t-20" action="#">
+                <div class="form-auth-small m-t-20">
                     <div class="form-group">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">🇮🇳 +91</span>
                             </div>
-                            <input type="text" class="form-control mobile-phone-number"
+                            <label for="phone_number"></label>
+                            <input style="background-color: #282b2f" type="number" id="phone_number" name="phone_number"
+                                   class="form-control mobile-phone-number"
                                    placeholder="(000) 000-00-00">
+                        </div>
+                    </div>
+
+                    <div class="form-group otp_container">
+                        <div class="input-group mb-3">
+                            <label for="one_time_password"></label>
+                            <input type="text" id="one_time_password" name="one_time_password"
+                                   class="form-control"
+                                   placeholder="Enter OTP">
                         </div>
                     </div>
                     <div class="form-group clearfix">
@@ -72,14 +89,25 @@
                             <span>Remember me</span>
                         </label>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-round btn-block">LOGIN</button>
-                </form>
+                    <button onclick="submitPhoneNumberAuth()" id="sign-in-button"
+                            class="btn btn-primary btn-round btn-block">Send OTP
+                    </button>
+                    <button onclick="submitPhoneNumberAuthCode()" id="confirm-code"
+                            class="otp_container btn btn-primary btn-round btn-block">Verify OTP
+                    </button>
+                </div>
             </div>
         </div>
     </div>
     <div id="particles-js"></div>
 </div>
+<div id="recaptcha-container"></div>
 <!-- END WRAPPER -->
+
+<!-- Firebase dependencies -->
+<script src="https://www.gstatic.com/firebasejs/9.8.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.8.1/firebase-auth-compat.js"></script>
+<script src="{% static 'js/firebase/firebase_auth.js' %}"></script>
 
 <script src="{% static 'bundles/libscripts.bundle.js' %}"></script>
 <script src="{% static 'bundles/vendorscripts.bundle.js' %}"></script>
