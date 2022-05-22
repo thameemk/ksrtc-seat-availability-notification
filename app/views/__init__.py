@@ -5,4 +5,4 @@
 #  Last modified time : Wed, 18 May 2022 at 11:11 PM India Standard Time
 
 from .home import index
-from .login import login
+from .login import Login
