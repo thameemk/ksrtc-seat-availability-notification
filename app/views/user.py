@@ -6,6 +6,7 @@
 from beartype import beartype
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpResponse
+from django.shortcuts import render
 
 
 class User:
@@ -15,4 +16,4 @@ class User:
 
     @beartype
     def home(self, request: WSGIRequest) -> 'HttpResponse':
-        return HttpResponse("Successfully Authenticated")
+        return render(request, 'user/home.html')
