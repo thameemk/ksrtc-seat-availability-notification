@@ -12,6 +12,7 @@ requests = "*"
 lxml = "*"
 fireo = "*"
 pendulum = "*"
+firebase-admin = "*"
 
 [dev-packages]
 flake8 = "*"

@@ -6,6 +6,35 @@
  * Last modified time : Sun, 22 May 2022 at 11:45 PM India Standard Time
  */
 
+
+function Auth(idToken) {
+    const form = document.body.appendChild(document.createElement("form"));
+    form.action = "/auth/callback/";
+    form.method = "POST";
+    const input = form.appendChild(document.createElement("input"));
+    input.type = "hidden";
+    input.name = "token";
+    input.value = idToken;
+    form.submit();
+}
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+
 const firebaseConfig = {
     apiKey: "AIzaSyAZTy6_ju9ivkIZGzezM_Z1rEVT7VBNPdI",
     authDomain: "ksrtc-notification-system.firebaseapp.com",
@@ -17,7 +46,9 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 
+
 window.onload = function () {
+
     // Listening for auth state changes.
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
@@ -26,8 +57,12 @@ window.onload = function () {
             const phoneNumber = user.phoneNumber;
             const accessToken = user.getIdToken()
             console.log(accessToken)
-
+            let idToken = getCookie()
+            Auth(idToken)
             // window.location = '/user/home';
+        } else {
+            // No user is signed in.
+            console.log("USER NOT LOGGED IN");
         }
     });
 
@@ -86,11 +121,3 @@ function submitPhoneNumberAuthCode() {
         });
 }
 
-firebase.auth().onAuthStateChanged(function (user) {
-    if (user) {
-        console.log("USER LOGGED IN");
-    } else {
-        // No user is signed in.
-        console.log("USER NOT LOGGED IN");
-    }
-});

@@ -13,6 +13,11 @@ class Login:
 
     @staticmethod
     @beartype
+    def auth_callback(request: WSGIRequest) -> 'HttpResponse':
+        pass
+
+    @staticmethod
+    @beartype
     def login(request: WSGIRequest) -> 'HttpResponse':
         data = {'page_title': 'Login | KSRTC Seat Availability Notification'}
         return render(request, 'login.html', data)
