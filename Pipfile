@@ -13,6 +13,7 @@ lxml = "*"
 fireo = "*"
 pendulum = "*"
 firebase-admin = "*"
+tzdata = "*"
 
 [dev-packages]
 flake8 = "*"
