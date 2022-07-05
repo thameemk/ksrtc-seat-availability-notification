@@ -23,6 +23,9 @@
     <orderEntry type="library" name="firebase-auth" level="application" />
     <orderEntry type="library" name="firebase-auth-compat" level="application" />
     <orderEntry type="library" name="firebase-app-compat" level="application" />
+    <orderEntry type="library" name="require" level="application" />
+    <orderEntry type="library" name="firebase-auth-compat" level="application" />
+    <orderEntry type="library" name="firebase-app-compat" level="application" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Django" />
