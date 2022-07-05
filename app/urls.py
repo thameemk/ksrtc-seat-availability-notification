@@ -6,10 +6,12 @@
 
 from django.urls import path
 
-from views import index, Login
+from views import index, Login, User
 
 urlpatterns = [
     path('', index, name='index'),
     path('login', Login.login, name='login'),
-    path('login_action', Login.login_action),
+    path('auth/callback/', Login.auth_callback),
+    path('user/home', User().home)
+
 ]

@@ -6,3 +6,4 @@
 
 from .home import index
 from .login import Login
+from .user import User
