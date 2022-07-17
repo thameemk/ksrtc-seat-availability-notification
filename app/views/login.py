@@ -9,14 +9,18 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
+from libs import FirebaseAuth
+from models import UserModel
+
 
 class Login:
 
     @staticmethod
     @beartype
-    @csrf_exempt
     def auth_callback(request: WSGIRequest) -> 'HttpResponse':
         # todo - check user in db, if not, validate firebase uid and save
+        firebase_user = FirebaseAuth().validate_token(request.headers['Bearer'])
+        status, user = UserModel.get_user()
         return HttpResponse("login_success")
 
     @staticmethod
