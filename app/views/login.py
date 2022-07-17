@@ -17,6 +17,8 @@ class Login:
     @staticmethod
     @beartype
     def auth_callback(request: WSGIRequest) -> 'HttpResponse':
+        # todo - add full name in login.html
+        # todo - get firebase user object from validate token
         # todo - check user in db, if not, validate firebase uid and save
         firebase_uid = FirebaseAuth().validate_token(request.headers['Bearer'])
         UserModel.get_user(firebase_uid)
