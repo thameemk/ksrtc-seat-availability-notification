@@ -5,7 +5,7 @@
 #  Last modified time : Thu, 19 May 2022 at 8:22 PM India Standard Time
 from beartype import beartype
 from django.core.handlers.wsgi import WSGIRequest
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
