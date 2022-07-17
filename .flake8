@@ -1,7 +1,8 @@
 [flake8]
 
 # ANN101 - Missing type annotation for self in method
+# ANN102 Missing type annotation for cls in classmethod
 # E501 line too long (91 > 79 characters)
 
-ignore=ANN101, E501
+ignore=ANN101, E501, ANN102
 exclude = __init__.py

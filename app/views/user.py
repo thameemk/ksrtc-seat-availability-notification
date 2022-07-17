@@ -11,7 +11,7 @@ from django.shortcuts import render
 
 class User:
     @beartype
-    def __init__(self):
+    def __init__(self) -> None:
         pass
 
     @beartype
