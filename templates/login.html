@@ -126,15 +126,10 @@
     window.onload = function () {
 
         // Listening for auth state changes.
-        firebase.auth().onAuthStateChanged(function (user) {
+        firebase.auth().onAuthStateChanged(async function (user) {
             if (user) {
                 // user is signed in
-                const accessToken = user.getIdToken()
-                console.log(accessToken)
-                sendAuthDataToServer(user.getIdToken(), user.phoneNumber)
-            } else {
-                // no user is signed in.
-                console.log("USER NOT LOGGED IN");
+                sendAuthDataToServer(await user.getIdToken(false), user.phoneNumber)
             }
         });
 
@@ -174,7 +169,6 @@
     // to activate otp field on sending otp from firebase
 
     function activateOTPField() {
-        console.log("true")
         const elems = document.querySelectorAll(".otp_container");
         [].forEach.call(elems, function (el) {
             el.classList.remove("otp_container");
@@ -190,11 +184,10 @@
         const code = document.getElementById("one_time_password").value;
         confirmationResult
             .confirm(code)
-            .then(function (result) {
+            .then(async function (result) {
                 const user = result.user;
-                const token = user.token;
+                const token = await user.getIdToken(false);
                 const phoneNumber = user.phoneNumber;
-                console.log(user);
                 if (token !== null && token !== undefined && token !== "") {
                     sendAuthDataToServer(token, phoneNumber);
                 }
@@ -209,7 +202,6 @@
         const xhr = new XMLHttpRequest();
         xhr.addEventListener("readystatechange", function () {
             if (this.readyState === 4) {
-                console.log(this.responseText);
                 if (this.responseText === "login_success") {
                     alert("Login Success full");
                     location = "/user/home";
@@ -222,7 +214,8 @@
         xhr.open("POST", "/auth/callback/", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.setRequestHeader("X-CSRFToken", csrftoken);
-        xhr.send("phone_number=" + phoneNumber + "&token=" + token);
+        xhr.setRequestHeader("BEARER", token);
+        xhr.send();
     }
 
     function getCookie(name) {
