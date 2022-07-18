@@ -20,6 +20,5 @@ class FirebaseAuth:
             firebase_admin.get_app()
 
     @beartype
-    def validate_token(self, id_token: str) -> str:
-        user = auth.verify_id_token(id_token)
-        return user['uid']
+    def validate_token(self, id_token: str) -> dict:
+        return auth.verify_id_token(id_token)
