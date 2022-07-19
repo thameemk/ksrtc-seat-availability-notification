@@ -8,9 +8,13 @@ from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpResponse
 from django.shortcuts import render
 
+from libs import authenticate
+
 
 class User:
 
+    @staticmethod
     @beartype
-    def home(self, request: WSGIRequest) -> 'HttpResponse':
+    @authenticate
+    def home(request: WSGIRequest) -> 'HttpResponse':
         return render(request, 'user/home.html')

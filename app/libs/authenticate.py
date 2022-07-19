@@ -6,6 +6,7 @@
 from functools import wraps
 
 from beartype import beartype
+from django.shortcuts import redirect
 
 
 @beartype
@@ -13,9 +14,9 @@ def authenticate(func):
     @wraps(func)
     def wrap(*args, **kwargs):
         # todo - context or session management
-        if args.session['user'] is None:
-            raise Exception("not logged in")
-        else:
+        if 'user' in args[0].session:
             return func(*args, **kwargs)
+        else:
+            return redirect('login')
 
     return wrap

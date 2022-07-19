@@ -9,7 +9,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 from libs import FirebaseAuth
-from models import UserModel
+from models_ import UserModel
 
 
 class Login:
