@@ -203,7 +203,6 @@
         xhr.addEventListener("readystatechange", function () {
             if (this.readyState === 4) {
                 if (this.responseText === "login_success") {
-                    alert("Login Success full");
                     location = "/user/home";
                 } else {
                     alert("Error in Login");

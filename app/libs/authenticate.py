@@ -14,7 +14,6 @@ from django.shortcuts import redirect
 def authenticate(func):
     @wraps(func)
     def wrap(*args, **kwargs):
-        # todo - context or session management
         if 'user' in args[0].session:
             return func(*args, **kwargs)
         else:
