@@ -9,6 +9,7 @@ from beartype import beartype
 from django.shortcuts import redirect
 
 
+# flake8: noqa ANN001, ANN201, ANN002, ANN003
 @beartype
 def authenticate(func):
     @wraps(func)
