@@ -21,7 +21,8 @@ class Login:
         auth_user = FirebaseAuth().validate_token(request.headers['Bearer'])
         user = UserModel.get_user(auth_user['uid'])
         if user is None:
-            UserModel.save_user(auth_user['uid'], auth_user['phone_number'], "Guest")
+            user = UserModel.save_user(auth_user['uid'], auth_user['phone_number'], "Guest")
+        request.session['user'] = user
         return HttpResponse("login_success")
 
     @staticmethod
