@@ -8,8 +8,8 @@ from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from libs import FirebaseAuth
-from models_ import UserModel
+from app.libs import FirebaseAuth
+from app.models import UserModel
 
 
 class Login:
