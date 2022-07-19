@@ -10,9 +10,6 @@ from django.shortcuts import render
 
 
 class User:
-    @beartype
-    def __init__(self) -> None:
-        pass
 
     @beartype
     def home(self, request: WSGIRequest) -> 'HttpResponse':

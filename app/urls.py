@@ -12,6 +12,6 @@ urlpatterns = [
     path('', Login.login),
     path('login', Login.login, name='login'),
     path('auth/callback/', Login.auth_callback),
-    path('user/home', User().home)
+    path('user/home', User.home)
 
 ]
