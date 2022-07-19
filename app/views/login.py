@@ -8,8 +8,8 @@ from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from libs import FirebaseAuth
-from models import UserModel
+from app.libs import FirebaseAuth
+from app.models import UserModel
 
 
 class Login:
@@ -21,7 +21,8 @@ class Login:
         auth_user = FirebaseAuth().validate_token(request.headers['Bearer'])
         user = UserModel.get_user(auth_user['uid'])
         if user is None:
-            UserModel.save_user(auth_user['uid'], auth_user['phone_number'], "Guest")
+            user = UserModel.save_user(auth_user['uid'], auth_user['phone_number'], "Guest")
+        request.session['user'] = user.uid
         return HttpResponse("login_success")
 
     @staticmethod
