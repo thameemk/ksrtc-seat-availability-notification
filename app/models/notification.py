@@ -8,7 +8,7 @@ import pendulum
 from fireo.fields import ReferenceField, BooleanField, DateTime, NumberField
 from fireo.models import Model
 
-from models import ServiceLocationModel, UserModel
+from app.models import ServiceLocationModel, UserModel
 
 
 class NotificationModel(Model):
