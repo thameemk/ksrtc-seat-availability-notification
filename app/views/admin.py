@@ -6,6 +6,7 @@
 import json
 
 import requests
+from beartype import beartype
 from bs4 import BeautifulSoup
 
 from main.settings import KSRTC_HOME_URL
@@ -14,7 +15,8 @@ from main.settings import KSRTC_HOME_URL
 class Admin:
 
     @staticmethod
-    def _fetch_locations():
+    @beartype
+    def _fetch_locations() -> None:
         response = requests.post(KSRTC_HOME_URL, headers={'User-Agent': 'Mozilla/5.0'})
         if response.status_code == 200:
             soup = BeautifulSoup(response.content, 'lxml')
