@@ -19,6 +19,7 @@ class UserModel(Model):
     full_name = TextField(required=True)
     phone_number = TextField(required=True)
     is_deleted = BooleanField(required=True, default=False)
+    user_type = TextField(required=True, default="user")  # todo - update permission using deny
     created_on = DateTime(required=True, default=datetime.now())
     modified_on = DateTime(required=True, default=datetime.now())
 
