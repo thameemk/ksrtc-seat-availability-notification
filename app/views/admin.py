@@ -24,6 +24,7 @@ class Admin:
             soup = BeautifulSoup(response.content, 'lxml')
             raw_data = soup.find("main", attrs={"role": "main"}).find('script').string
             _locations = json.loads("".join(raw_data.split()).replace('varjsondata=', ""))
+            _locations = list(filter(lambda x: x['id'], _locations))
             locations: list[LocationModel] = []
             for location in _locations:
                 locations.append(
