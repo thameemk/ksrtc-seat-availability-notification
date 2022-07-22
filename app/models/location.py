@@ -28,3 +28,8 @@ class LocationModel(Model):
         ).save()
 
         return location
+
+    @classmethod
+    @beartype
+    def get_all_locations(cls) -> list['LocationModel']:
+        return [each for each in cls.collection.fetch()]
