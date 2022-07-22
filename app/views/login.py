@@ -7,6 +7,7 @@ from beartype import beartype
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
 
 from app.libs import FirebaseAuth
 from app.models import UserModel
@@ -16,8 +17,11 @@ class Login:
 
     @staticmethod
     @beartype
+    @csrf_exempt
     def auth_callback(request: WSGIRequest) -> 'HttpResponse':
+        # todo - fix csrf token in login.html
         # todo - add full name in login.html
+        # todo - submit phone number & otp button loader
         auth_user = FirebaseAuth().validate_token(request.headers['Bearer'])
         user = UserModel.get_user(auth_user['uid'])
         if user is None:

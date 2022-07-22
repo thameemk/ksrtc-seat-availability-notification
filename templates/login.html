@@ -5,10 +5,9 @@
   ~ Current modification time : Thu, 19 May 2022 at 8:06 PM India Standard Time
   ~ Last modified time : Thu, 19 May 2022 at 8:05 PM India Standard Time
   -->
-{% load static %}
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
+{% load static %}
 <head>
     <title>{{ page_title }}</title>
     <meta charset="utf-8">
@@ -21,12 +20,13 @@
     <link rel="icon" href="#" type="image/x-icon">
     <!-- VENDOR CSS -->
 
-    <link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}">
-    <link rel="stylesheet" href="{% static 'vendor/animate-css/vivify.min.css' %}">
+
+    <link rel="stylesheet" href="static/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="static/vendor/animate-css/vivify.min.css">
 
     <!-- MAIN CSS -->
-    <link rel="stylesheet" href="{% static 'css/site.min.css' %}">
+    <link rel="stylesheet" href="static/css/site.min.css">
 
     <style>
         .otp_container {
@@ -129,7 +129,7 @@
         firebase.auth().onAuthStateChanged(async function (user) {
             if (user) {
                 // user is signed in
-                sendAuthDataToServer(await user.getIdToken(false), user.phoneNumber)
+                sendAuthDataToServer(await user.getIdToken(false))
             }
         });
 
@@ -137,7 +137,7 @@
             "recaptcha-container",
             {
                 size: "invisible",
-                callback: function (response) {
+                callback: function () {
                     submitPhoneNumberAuth();
                 }
             }
@@ -187,9 +187,8 @@
             .then(async function (result) {
                 const user = result.user;
                 const token = await user.getIdToken(false);
-                const phoneNumber = user.phoneNumber;
                 if (token !== null && token !== undefined && token !== "") {
-                    sendAuthDataToServer(token, phoneNumber);
+                    sendAuthDataToServer(token);
                 }
             })
 
@@ -198,7 +197,7 @@
             });
     }
 
-    function sendAuthDataToServer(token, phoneNumber) {
+    function sendAuthDataToServer(token) {
         const xhr = new XMLHttpRequest();
         xhr.addEventListener("readystatechange", function () {
             if (this.readyState === 4) {
@@ -234,9 +233,9 @@
     }
 </script>
 
-<script src="{% static 'bundles/libscripts.bundle.js' %}"></script>
-<script src="{% static 'bundles/vendorscripts.bundle.js' %}"></script>
-<script src="{% static 'bundles/mainscripts.bundle.js' %}"></script>
+<script src="static/bundles/libscripts.bundle.js"></script>
+<script src="static/bundles/vendorscripts.bundle.js"></script>
+<script src="static/bundles/mainscripts.bundle.js"></script>
 
 </body>
 </html>
