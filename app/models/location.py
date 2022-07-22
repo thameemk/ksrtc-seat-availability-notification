@@ -28,5 +28,3 @@ class LocationModel(Model):
         ).save()
 
         return location
-
-
