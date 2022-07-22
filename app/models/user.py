@@ -26,16 +26,15 @@ class UserModel(Model):
     @classmethod
     @beartype
     def save_user(cls, firebase_uid: str, phone: str, full_name: str, ) -> 'UserModel':
-        user = UserModel()
-        user.uid = firebase_uid
-        user.phone_number = phone
-        user.full_name = full_name
-        user.save()
+        user = UserModel(
+            uid=firebase_uid,
+            phone_number=phone,
+            full_name=full_name
+        ).save()
         return user
 
     @classmethod
     @beartype
     def get_user(cls, firebase_uid: str) -> Optional['UserModel']:
-        _user = UserModel()
-        _user.uid = firebase_uid
+        _user = UserModel(uid=firebase_uid)
         return cls.collection.get(_user.key)
