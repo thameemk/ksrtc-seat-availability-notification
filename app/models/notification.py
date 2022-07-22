@@ -8,15 +8,15 @@ import pendulum
 from fireo.fields import ReferenceField, BooleanField, DateTime, NumberField
 from fireo.models import Model
 
-from app.models import ServiceLocationModel, UserModel
+from app.models import LocationModel, UserModel
 
 
 class NotificationModel(Model):
     class Meta:
         collection_name = "notifications"
 
-    leaving_from = ReferenceField(ServiceLocationModel, required=True)
-    going_to = ReferenceField(ServiceLocationModel, required=True)
+    leaving_from = ReferenceField(LocationModel, required=True)
+    going_to = ReferenceField(LocationModel, required=True)
     date_of_departure = DateTime(required=True)
     date_of_return = DateTime()
     user = ReferenceField(UserModel, required=True)
