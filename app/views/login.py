@@ -3,10 +3,12 @@
 #  Author : thameem
 #  Current modification time : Thu, 19 May 2022 at 8:22 PM India Standard Time
 #  Last modified time : Thu, 19 May 2022 at 8:22 PM India Standard Time
+import logging
+
 from beartype import beartype
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 
 from app.libs import FirebaseAuth
@@ -34,3 +36,13 @@ class Login:
     def login(request: WSGIRequest) -> 'HttpResponse':
         data = {'page_title': 'Login | KSRTC Seat Availability Notification'}
         return render(request, 'login.html', data)
+
+    @staticmethod
+    @beartype
+    @csrf_exempt
+    def logout(request: WSGIRequest) -> 'HttpResponse':
+        try:
+            del request.session['user']
+        except Exception as e:
+            logging.error((str(e)))
+        return HttpResponse("logout_success")
