@@ -1,10 +1,139 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Dashboard</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+
+    <link rel="icon" href="#" type="image/x-icon">
+    <!-- VENDOR CSS -->
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}">
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="{% static 'css/site.min.css' %}">
+
 </head>
-<body>
-<h1>Login Success</h1>
+<body class="theme-cyan font-montserrat">
+
+<!-- Page Loader -->
+<div class="page-loader-wrapper">
+    <div class="loader">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+        <div class="bar4"></div>
+        <div class="bar5"></div>
+    </div>
+</div>
+
+<!-- Overlay For Sidebars -->
+<div class="overlay"></div>
+
+<div id="wrapper">
+
+    <nav class="navbar top-navbar">
+        <div class="container-fluid">
+
+            <div class="navbar-left">
+                <div class="navbar-btn">
+                    <a href="#"><img src="{% static 'images/icon.svg' %}" alt="Logo"
+                                     class="img-fluid logo">Dashboard</a>
+                    <button type="button" class="btn-toggle-offcanvas"><i class="lnr lnr-menu fa fa-bars"></i></button>
+                </div>
+                <ul class="nav navbar-nav">
+
+                    <li><a href="javascript:void(0);" class="megamenu_toggle icon-menu"><i
+                            class="icon-envelope"></i></a></li>
+
+                    <li><a href="javascript:void(0);" class="megamenu_toggle icon-menu"><i
+                            class="icon-bell"></i></a></li>
+
+                    <li><a href="javascript:void(0);" class="megamenu_toggle icon-menu"><i
+                            class="fa fa-language"></i></a></li>
+
+                </ul>
+            </div>
+
+            <div class="navbar-right">
+                <div id="navbar-menu">
+                    <ul class="nav navbar-nav">
+                        <li><a href="#" class="icon-menu"><i class="icon-power"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="progress-container">
+            <div class="progress-bar" id="myBar"></div>
+        </div>
+    </nav>
+
+
+    <div id="left-sidebar" class="sidebar">
+        <div class="navbar-brand">
+            <a href="#"><img src="{% static 'images/icon.svg' %}" alt=" Logo" class="img-fluid logo"><span></span>Dashboard</a>
+            <button type="button" class="btn-toggle-offcanvas btn btn-sm float-right"><i
+                    class="lnr lnr-menu icon-close"></i></button>
+        </div>
+        <div class="sidebar-scroll">
+            <div class="user-account">
+                <div class="user_div">
+                    <img src="{% static 'images/user.png' %}" class="user-photo" alt="User Profile Picture">
+                </div>
+                <div class="dropdown">
+                    <span>Welcome,</span>
+                    <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong>Louis
+                        Pierce</strong></a>
+                    <ul class="dropdown-menu dropdown-menu-right account vivify flipInY">
+                        <li><a href="#"><i class="icon-user"></i>My Profile</a></li>
+                        <li><a href="javascript:void(0);"><i class="icon-settings"></i>Settings</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#"><i class="icon-power"></i>Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+            <nav id="left-sidebar-nav" class="sidebar-nav">
+                <ul id="main-menu" class="metismenu">
+                    <li class="active open"><a href="#"><i class="icon-speedometer"></i><span>Dashboard</span></a>
+                    </li>
+                    <li><a href="#"><i class="icon-doc"></i><span>Documentation</span></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div id="main-content">
+        <div class="container-fluid">
+            <div class="block-header">
+                <div class="row clearfix">
+                    <div class="col-md-6 col-sm-12">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="col-md-6 col-sm-12 text-right hidden-xs">
+                        <a href="javascript:void(0);" class="btn btn-sm btn-primary" title="">Fetch Location</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- Javascript -->
+<script src="{% static 'bundles/libscripts.bundle.js' %}"></script>
+<script src="{% static 'bundles/vendorscripts.bundle.js' %}"></script>
+
+<script src="{% static 'bundles/mainscripts.bundle.js' %}"></script>
 </body>
 </html>
