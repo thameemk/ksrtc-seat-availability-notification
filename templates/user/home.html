@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+Login Success
+
+<button type="button" onclick="firebaseSignOut()">Logout</button>
+
+<!-- Firebase dependencies -->
+<script src="https://www.gstatic.com/firebasejs/9.8.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.8.1/firebase-auth-compat.js"></script>
+
+<script>
+
+
+    function firebaseSignOut() {
+        // firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAZTy6_ju9ivkIZGzezM_Z1rEVT7VBNPdI",
+            authDomain: "ksrtc-notification-system.firebaseapp.com",
+            databaseURL: "https://ksrtc-notification-system-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "ksrtc-notification-system",
+            storageBucket: "ksrtc-notification-system.appspot.com",
+            messagingSenderId: "349088019332",
+            appId: "1:349088019332:web:e8cbaa5568c2e871a6a3d1"
+        };
+        //initialise firebase
+        firebase.initializeApp(firebaseConfig);
+
+        firebase.auth().signOut().then(function () {
+            const xhr = new XMLHttpRequest();
+            xhr.addEventListener("readystatechange", function () {
+                if (this.readyState === 4) {
+                    if (this.responseText === "logout_success") {
+                        location = "/login";
+                    } else {
+                        alert("Error in Logout");
+                    }
+                }
+            });
+            {#const csrftoken = getCookie('csrftoken');#}
+            xhr.open("POST", "/auth/logout/", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            {#xhr.setRequestHeader("X-CSRFToken", csrftoken);#}
+            {#xhr.setRequestHeader("BEARER", token);#}
+            xhr.send();
+        }, function (error) {
+            console.error('Sign Out Error', error);
+        });
+    }
+
+</script>
+
+</body>
+</html>

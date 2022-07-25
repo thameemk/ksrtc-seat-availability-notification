@@ -17,4 +17,4 @@ class User:
     @beartype
     @authenticate
     def home(request: WSGIRequest) -> 'HttpResponse':
-        return render(request, 'dashboard/pages/home.html')
+        return render(request, 'user/home.html')
