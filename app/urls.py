@@ -11,6 +11,7 @@ from app.views import Login, User
 urlpatterns = [
     path('', Login.login),
     path('login', Login.login, name='login'),
+    path('auth/logout/', Login.logout),
     path('auth/callback/', Login.auth_callback),
     path('user/home', User.home)
 
