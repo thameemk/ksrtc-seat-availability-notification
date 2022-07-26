@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,7 +26,7 @@
     <!-- Container wrapper -->
     <div class="container">
         <!-- Navbar brand -->
-        <a class="navbar-brand me-2" href="https://mdbgo.com/">
+        <a class="navbar-brand me-2" href="#">
             <img
                     src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
                     height="16"
@@ -165,20 +166,10 @@
 <script src="https://www.gstatic.com/firebasejs/9.8.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.8.1/firebase-auth-compat.js"></script>
 
-<script>
-    // firebase configuration
-    const firebaseConfig = {
-        apiKey: "AIzaSyAZTy6_ju9ivkIZGzezM_Z1rEVT7VBNPdI",
-        authDomain: "ksrtc-notification-system.firebaseapp.com",
-        databaseURL: "https://ksrtc-notification-system-default-rtdb.asia-southeast1.firebasedatabase.app",
-        projectId: "ksrtc-notification-system",
-        storageBucket: "ksrtc-notification-system.appspot.com",
-        messagingSenderId: "349088019332",
-        appId: "1:349088019332:web:e8cbaa5568c2e871a6a3d1"
-    };
-    //initialise firebase
-    firebase.initializeApp(firebaseConfig);
+<script src="{% static 'js/firebase.js' %}"></script>
 
+
+<script>
 
     window.onload = function () {
 
@@ -205,89 +196,6 @@
         });
     }
 
-
-    //login with phone number
-
-    function submitPhoneNumberAuth() {
-        const phoneNumber = "+91" + document.getElementById("phone_number").value;
-        const appVerifier = window.recaptchaVerifier;
-        firebase
-            .auth()
-            .signInWithPhoneNumber(phoneNumber, appVerifier)
-            .then(function (confirmationResult) {
-                window.confirmationResult = confirmationResult;
-                activateOTPField()
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    }
-
-    // to activate otp field on sending otp from firebase
-
-    function activateOTPField() {
-        const elems = document.querySelectorAll(".otp_container");
-        [].forEach.call(elems, function (el) {
-            el.classList.remove("otp_container");
-        });
-        document.getElementById("phone_number").disabled = true;
-        document.getElementById('sign-in-button').remove();
-    }
-
-
-    // on submitting the otp
-
-    function submitPhoneNumberAuthCode() {
-        const code = document.getElementById("one_time_password").value;
-        confirmationResult
-            .confirm(code)
-            .then(async function (result) {
-                const user = result.user;
-                const token = await user.getIdToken(false);
-                if (token !== null && token !== undefined && token !== "") {
-                    sendAuthDataToServer(token);
-                }
-            })
-
-            .catch(function (error) {
-                console.log(error);
-            });
-    }
-
-    function sendAuthDataToServer(token) {
-        const xhr = new XMLHttpRequest();
-        xhr.addEventListener("readystatechange", function () {
-            if (this.readyState === 4) {
-                if (this.responseText === "login_success") {
-                    location = "/user/home";
-                } else {
-                    alert("Error in Login");
-                }
-            }
-        });
-        const csrftoken = getCookie('csrftoken');
-        xhr.open("POST", "/auth/callback/", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.setRequestHeader("X-CSRFToken", csrftoken);
-        xhr.setRequestHeader("BEARER", token);
-        xhr.send();
-    }
-
-    function getCookie(name) {
-        let cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            const cookies = document.cookie.split(';');
-            for (let i = 0; i < cookies.length; i++) {
-                const cookie = cookies[i].trim();
-                // Does this cookie string begin with the name we want?
-                if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue;
-    }
 </script>
 
 <!-- MDB -->
