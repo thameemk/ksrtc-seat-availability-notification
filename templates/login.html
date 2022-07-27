@@ -1,7 +1,7 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
+{% extends 'theme/header.html' %}
+{%  block body %}
 <body>
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -147,7 +147,7 @@
 <!-- Firebase dependencies -->
 <script src="https://www.gstatic.com/firebasejs/9.8.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.8.1/firebase-auth-compat.js"></script>
-
+{% load static %}
 <script src="{% static 'js/firebase.js' %}"></script>
 
 
@@ -183,5 +183,6 @@
 <!-- MDB -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.3.0/mdb.min.js"></script>
 
+{% endblock body %}
 </body>
 </html>
