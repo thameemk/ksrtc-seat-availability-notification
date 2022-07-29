@@ -1,0 +1,38 @@
+<div id="recaptcha-container"></div>
+
+<!-- Firebase dependencies -->
+<script src="https://www.gstatic.com/firebasejs/9.8.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.8.1/firebase-auth-compat.js"></script>
+{% load static %}
+<script src="{% static 'js/firebase.js' %}"></script>
+
+
+<script>
+
+    window.onload = function () {
+
+        // Listening for auth state changes.
+        firebase.auth().onAuthStateChanged(async function (user) {
+            if (user) {
+                // user is signed in
+                sendAuthDataToServer(await user.getIdToken(false))
+            }
+        });
+
+        window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
+            "recaptcha-container",
+            {
+                size: "invisible",
+                callback: function () {
+                    submitPhoneNumberAuth();
+                }
+            }
+        );
+
+        recaptchaVerifier.render().then(function (widgetId) {
+            window.recaptchaWidgetId = widgetId;
+        });
+    }
+
+</script>
+
