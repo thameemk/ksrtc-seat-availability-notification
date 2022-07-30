@@ -7,32 +7,3 @@
 <script src="{% static 'js/firebase.js' %}"></script>
 
 
-<script>
-
-    window.onload = function () {
-
-        // Listening for auth state changes.
-        firebase.auth().onAuthStateChanged(async function (user) {
-            if (user) {
-                // user is signed in
-                sendAuthDataToServer(await user.getIdToken(false))
-            }
-        });
-
-        window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
-            "recaptcha-container",
-            {
-                size: "invisible",
-                callback: function () {
-                    submitPhoneNumberAuth();
-                }
-            }
-        );
-
-        recaptchaVerifier.render().then(function (widgetId) {
-            window.recaptchaWidgetId = widgetId;
-        });
-    }
-
-</script>
-
