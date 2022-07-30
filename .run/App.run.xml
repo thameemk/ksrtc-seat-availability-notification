@@ -4,8 +4,10 @@
     <option name="INTERPRETER_OPTIONS" value="" />
     <option name="PARENT_ENVS" value="true" />
     <envs>
-      <env name="PYTHONUNBUFFERED" value="1" />
       <env name="DJANGO_SETTINGS_MODULE" value="main.settings" />
+      <env name="GOOGLE_APPLICATION_CREDENTIALS" value="$PROJECT_DIR$/serviceAccountKey.json" />
+      <env name="KSRTC_HOME_URL" value="https://online.keralartc.com/oprs-web/" />
+      <env name="PYTHONUNBUFFERED" value="1" />
     </envs>
     <option name="SDK_HOME" value="$USER_HOME$/Documents/PycharmProjects/Virtuals/ksrtc-seat-availability-notification/bin/python" />
     <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -20,7 +22,7 @@
       <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
       <ENTRIES>
         <ENTRY IS_ENABLED="true" PARSER="runconfig" />
-        <ENTRY IS_ENABLED="true" PARSER="env" PATH="local.env" />
+        <ENTRY IS_ENABLED="true" PARSER="env" PATH="app/local.env" />
       </ENTRIES>
     </EXTENSION>
     <option name="launchJavascriptDebuger" value="false" />

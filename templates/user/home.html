@@ -1,20 +1,20 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+{% include 'theme/header.html' %}
 <body>
+
+
+{% include 'theme/navbar.html' %}
+
 Login Success
 
 <button type="button" onclick="firebaseSignOut()">Logout</button>
 
-<!-- Firebase dependencies -->
-<script src="https://www.gstatic.com/firebasejs/9.8.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.8.1/firebase-auth-compat.js"></script>
 
-<script src="{% static 'js/firebase.js' %}"></script>
+{% include 'theme/firebase.html' %}
+
+{%  include 'theme/footer.html' %}
 
 </body>
 </html>
