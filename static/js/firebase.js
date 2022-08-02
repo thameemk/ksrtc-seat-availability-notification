@@ -25,18 +25,22 @@ firebase.initializeApp(firebaseConfig);
 //login with phone number
 
 function submitPhoneNumberAuth() {
-    const phoneNumber = "+91" + document.getElementById("phone_number").value;
-    const appVerifier = window.recaptchaVerifier;
-    firebase
-        .auth()
-        .signInWithPhoneNumber(phoneNumber, appVerifier)
-        .then(function (confirmationResult) {
-            window.confirmationResult = confirmationResult;
-            activateOTPField()
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+    const phoneNumber = document.getElementById("phone_number");
+    if (phoneNumber.value.length !== 10) {
+        alert("Enter 10 digit phone number")
+    } else {
+        const appVerifier = window.recaptchaVerifier;
+        firebase
+            .auth()
+            .signInWithPhoneNumber("+91" + phoneNumber.value, appVerifier)
+            .then(function (confirmationResult) {
+                window.confirmationResult = confirmationResult;
+                activateOTPField()
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
 }
 
 
