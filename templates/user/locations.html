@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+{% include 'theme/header.html' %}
+<body>
+
+
+{% include 'theme/navbar.html' %}
+
+<section class="container">
+    <h3 class="fw-bold m-3 text-center">KSRTC Service Locations</h3>
+    <table class="table">
+        <thead class="table-dark">
+        <th class="text-center">Reference Number</th>
+        <th class="text-center">Location Name</th>
+        </thead>
+        <tbody></tbody>
+    </table>
+</section>
+
+
+{% include 'theme/firebase.html' %}
+
+{% include 'theme/footer.html' %}
+
+</body>
+</html>
