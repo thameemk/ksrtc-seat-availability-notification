@@ -18,9 +18,3 @@ class User:
     @authenticate
     def home(request: WSGIRequest) -> 'HttpResponse':
         return render(request, 'user/home.html')
-
-    @staticmethod
-    @beartype
-    @authenticate
-    def locations(request: WSGIRequest) -> 'HttpResponse':
-        return render(request, 'user/locations.html')

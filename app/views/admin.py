@@ -8,7 +8,11 @@ import json
 import requests
 from beartype import beartype
 from bs4 import BeautifulSoup
+from django.core.handlers.wsgi import WSGIRequest
+from django.http import HttpResponse
+from django.shortcuts import render
 
+from libs import authenticate
 from main.settings import KSRTC_HOME_URL
 
 from app.models import LocationModel
@@ -34,3 +38,11 @@ class Admin:
 
         else:
             raise Exception(f"{response.status_code}")
+
+    @staticmethod
+    @beartype
+    @authenticate
+    def locations(request: WSGIRequest) -> 'HttpResponse':
+        from models import LocationModel
+        data = {'locations': LocationModel.get_all_locations()}
+        return render(request, 'user/locations.html', data)
