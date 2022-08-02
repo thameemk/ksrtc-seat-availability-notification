@@ -52,7 +52,7 @@ function activateOTPField() {
         el.classList.remove("otp_container");
     });
     document.getElementById("phone_number").disabled = true;
-    document.getElementById('sign-in-button').remove();
+    document.getElementById('sign_in_button').remove();
 }
 
 // on submitting the otp
