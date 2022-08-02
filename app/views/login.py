@@ -8,7 +8,7 @@ import logging
 from beartype import beartype
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
 from app.libs import FirebaseAuth

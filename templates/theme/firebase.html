@@ -5,21 +5,3 @@
 <script src="https://www.gstatic.com/firebasejs/9.8.1/firebase-auth-compat.js"></script>
 {% load static %}
 <script src="{% static 'js/firebase.js' %}"></script>
-
-<script>
-    window.onload = function () {
-
-        // Listening for auth state changes.
-        firebase.auth().onAuthStateChanged(async function (user) {
-            if (user) {
-                //show logout button
-                console.log("1")
-                document.getElementById('auth_login_button').style.display = 'none';
-            } else {
-                //show login button
-                console.log("2")
-                document.getElementById('auth_logout_button').style.display = 'none';
-            }
-        });
-    }
-</script>

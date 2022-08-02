@@ -7,14 +7,17 @@
 
 {% include 'theme/navbar.html' %}
 
+
 Login Success
 
-<button type="button" onclick="firebaseSignOut()">Logout</button>
+<br>
+
+{{ request.session.user }}
 
 
 {% include 'theme/firebase.html' %}
 
-{%  include 'theme/footer.html' %}
+{% include 'theme/footer.html' %}
 
 </body>
 </html>
