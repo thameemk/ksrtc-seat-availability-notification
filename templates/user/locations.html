@@ -14,9 +14,13 @@
         <th class="text-center">Reference Number</th>
         <th class="text-center">Location Name</th>
         </thead>
-        <tbody></tbody>
+        {% for location in locations %}
+            <tbody>
+            <td class="text-center">{{ location.location_id }}</td>
+            <td class="text-center">{{ location.location_name }}</td>
+            </tbody>
+        {% endfor %}
     </table>
-    {{ locations }}
 </section>
 
 
