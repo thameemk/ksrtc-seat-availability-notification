@@ -6,7 +6,7 @@
 
 from django.urls import path
 
-from app.views import Login, User
+from app.views import Login, User, Admin
 
 urlpatterns = [
     path('', Login.login),
@@ -14,6 +14,6 @@ urlpatterns = [
     path('auth/logout/', Login.logout),
     path('auth/callback/', Login.auth_callback),
     path('user/home', User.home),
-    path('user/locations', User.locations)
+    path('admin/locations', Admin.locations)
 
 ]
