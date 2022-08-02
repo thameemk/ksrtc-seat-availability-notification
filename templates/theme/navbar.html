@@ -37,13 +37,17 @@
             <!-- Left links -->
 
             <div class="d-flex align-items-center">
-                <button id="auth_login_button" type="button" class="btn btn-link px-3 me-2">
-                    Login
-                </button>
-                <button id="auth_logout_button" type="button" class="btn btn-link px-3 me-2">
-                    Logout
-                </button>
-                <a class="btn btn-dark px-3" href="https://github.com/thameemk612/ksrtc-seat-availability-notification"
+                {% if 'user' in request.session %}
+                    <button onclick="firebaseSignOut()" type="button" class="btn btn-danger px-3 me-2">
+                        Logout
+                    </button>
+                {% else %}
+                    <a href="/login" type="button" class="btn btn-success px-3 me-2">
+                        Login
+                    </a>
+                {% endif %}
+
+                <a class="btn btn-dark px-3" target="_blank" href="https://github.com/thameemk612/ksrtc-seat-availability-notification"
                    role="button"><i class="fab fa-github"></i></a>
             </div>
         </div>
