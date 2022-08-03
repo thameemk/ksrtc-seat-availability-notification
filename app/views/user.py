@@ -16,5 +16,6 @@ class User:
     @staticmethod
     @beartype
     @authenticate
-    def home(request: WSGIRequest) -> 'HttpResponse':
-        return render(request, 'user/home.html')
+    def dynamic_pages(request: WSGIRequest, page: str) -> 'HttpResponse':
+        data = {'page_title': f"{request.session['user_name']} - {page.title()} | KSRTC Seat Availability Notification"}
+        return render(request, f'user/{page}.html', data)
