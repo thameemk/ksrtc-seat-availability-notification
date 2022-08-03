@@ -79,7 +79,7 @@ function sendAuthDataToServer(token) {
     xhr.addEventListener("readystatechange", function () {
         if (this.readyState === 4) {
             if (this.responseText === "login_success") {
-                location = "/user/home";
+                location = "/user/home/";
             } else {
                 alert("Error in Login");
             }

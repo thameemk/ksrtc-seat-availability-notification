@@ -16,5 +16,5 @@ class User:
     @staticmethod
     @beartype
     @authenticate
-    def home(request: WSGIRequest) -> 'HttpResponse':
-        return render(request, 'user/home.html')
+    def dynamic_pages(request: WSGIRequest, page: str) -> 'HttpResponse':
+        return render(request, f'user/{page}.html')
