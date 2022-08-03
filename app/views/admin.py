@@ -42,7 +42,8 @@ class Admin:
     @staticmethod
     @beartype
     @authenticate
-    def locations(request: WSGIRequest) -> 'HttpResponse':
+    def dynamic_pages(request: WSGIRequest, page: str) -> 'HttpResponse':
         from models import LocationModel
-        data = {'locations': LocationModel.get_all_locations()}
-        return render(request, 'user/locations.html', data)
+        data = {'locations': LocationModel.get_all_locations(),
+                'page_title': f"{request.session['user_name']} - {page.title()} | KSRTC Seat Availability Notification"}
+        return render(request, f'admin/{page}.html', data)
