@@ -13,7 +13,8 @@ urlpatterns = [
     path('login', Login.login, name='login'),
     path('auth/logout/', Login.logout),
     path('auth/callback/', Login.auth_callback),
-    path('user/home', User.home),
-    path('admin/locations', Admin.locations)
+
+    path('admin/<page>/', Admin.dynamic_pages),
+    path('user/<page>/', User.dynamic_pages)
 
 ]
