@@ -17,4 +17,5 @@ class User:
     @beartype
     @authenticate
     def dynamic_pages(request: WSGIRequest, page: str) -> 'HttpResponse':
-        return render(request, f'user/{page}.html')
+        data = {'page_title': f"{request.session['user_name']} - {page.title()} | KSRTC Seat Availability Notification"}
+        return render(request, f'user/{page}.html', data)

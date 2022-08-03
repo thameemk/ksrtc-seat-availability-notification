@@ -44,5 +44,6 @@ class Admin:
     @authenticate
     def dynamic_pages(request: WSGIRequest, page: str) -> 'HttpResponse':
         from models import LocationModel
-        data = {'locations': LocationModel.get_all_locations()}
+        data = {'locations': LocationModel.get_all_locations(),
+                'page_title': f"{request.session['user_name']} - {page.title()} | KSRTC Seat Availability Notification"}
         return render(request, f'admin/{page}.html', data)

@@ -29,6 +29,7 @@ class Login:
         if user is None:
             user = UserModel.save_user(auth_user['uid'], auth_user['phone_number'], "Guest")
         request.session['user'] = user.uid
+        request.session['user_name'] = user.full_name
         return HttpResponse("login_success")
 
     @staticmethod
