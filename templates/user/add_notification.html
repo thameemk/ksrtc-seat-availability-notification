@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+{% include 'theme/header.html' %}
+<body>
+
+
+{% include 'theme/navbar.html' %}
+
+<section class="container">
+    <h3 class="fw-bold m-3 text-center">Add New Notification</h3>
+    <center>
+        <form class="col-lg-6  col-md-12">
+            <div class="row mb-4">
+
+                <div class="col-6 mb-4">
+                    <div class="form-outline">
+                        <input required class="form-control" type="text" name="leaving_from">
+                        <label class="form-label">Leaving From </label>
+                    </div>
+                </div>
+
+                <div class="col-6 mb-4">
+                    <div class="form-outline">
+                        <input required class="form-control" type="text" name="going_to">
+                        <label class="form-label">Going To </label>
+                    </div>
+                </div>
+
+                <div class="col-6 mb-4">
+                    <div class="form-outline">
+                        <input required class="form-control" type="date" name="date_of_departure">
+                        <label class="form-label">Date Of Departure </label>
+                    </div>
+                </div>
+
+                <div class="col-6 mb-4">
+                    <div class="form-outline">
+                        <input class="form-control" type="date" name="date_of_return">
+                        <label class="form-label">Date Of Return </label>
+                    </div>
+                </div>
+
+                <div class="col-6 mb-4">
+                    <div class="form-outline">
+                        <input class="form-control" type="time" name="time_interval">
+                        <label class="form-label">Time Interval</label>
+                    </div>
+                </div>
+
+                <div class="col-6 mb-4">
+                    <div class="form-outline">
+                        <input class="form-control" type="date" name="receive_notification_up_to">
+                        <label class="form-label">Expiry Date</label>
+                    </div>
+                </div>
+
+                <center>
+                    <div class="col-6 mb-4">
+                        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                    </div>
+                </center>
+
+            </div>
+
+        </form>
+    </center>
+</section>
+
+
+{% include 'theme/firebase.html' %}
+
+{% include 'theme/footer.html' %}
+
+</body>
+</html>
