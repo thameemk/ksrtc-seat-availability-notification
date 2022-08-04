@@ -9,6 +9,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 from app.libs import authenticate
+from models import NotificationModel
 
 
 class User:
@@ -17,5 +18,6 @@ class User:
     @beartype
     @authenticate
     def dynamic_pages(request: WSGIRequest, page: str) -> 'HttpResponse':
-        data = {'page_title': f"{request.session['user_name']} - {page.title()} | KSRTC Seat Availability Notification"}
+        data = {'page_title': f"{request.session['user_name']} - {page.title()} | KSRTC Seat Availability Notification",
+                'notifications': NotificationModel.get_notifications(request.session['user'])}
         return render(request, f'user/{page}.html', data)
