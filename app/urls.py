@@ -14,7 +14,10 @@ urlpatterns = [
     path('auth/logout/', Login.logout),
     path('auth/callback/', Login.auth_callback),
 
+    path('user/save_notification/', User.save_notification),
+
     path('admin/<page>/', Admin.dynamic_pages),
-    path('user/<page>/', User.dynamic_pages)
+    path('user/<page>/', User.dynamic_pages),
+
 
 ]
