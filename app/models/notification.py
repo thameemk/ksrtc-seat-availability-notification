@@ -32,3 +32,8 @@ class NotificationModel(Model):
     @beartype
     def get_notifications(cls, user: str) -> Optional[list['NotificationModel']]:
         return [each for each in cls.collection.fetch() if each.user == user]
+
+    @classmethod
+    @beartype
+    def save_notification(cls, notification: 'NotificationModel') -> 'NotificationModel':
+        return notification.save()
