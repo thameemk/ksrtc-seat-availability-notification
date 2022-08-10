@@ -7,10 +7,10 @@ import logging
 
 import firebase_admin
 from beartype import beartype
-from firebase_admin import auth
+from firebase_admin import auth, firestore
 
 
-class FirebaseAuth:
+class Firebase:
     @beartype
     def __init__(self) -> None:
         try:
@@ -22,3 +22,7 @@ class FirebaseAuth:
     @beartype
     def validate_token(self, id_token: str) -> dict:
         return auth.verify_id_token(id_token)
+
+    @beartype
+    def access_firestore(self) -> None:
+        db = firestore.client()

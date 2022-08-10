@@ -4,5 +4,5 @@
 #  Current modification time : Wed, 25 May 2022 at 12:15 AM India Standard Time
 #  Last modified time : Wed, 25 May 2022 at 12:15 AM India Standard Time
 
-from .firebase_auth import FirebaseAuth
+from .firebase import Firebase
 from .authenticate import authenticate
