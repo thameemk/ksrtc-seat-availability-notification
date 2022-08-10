@@ -15,7 +15,7 @@ from django.shortcuts import render
 from libs import authenticate
 from main.settings import KSRTC_HOME_URL
 
-from app.models import LocationModel
+from models import LocationModel
 
 
 class Admin:
