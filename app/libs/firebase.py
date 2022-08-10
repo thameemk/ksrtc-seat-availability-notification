@@ -25,4 +25,4 @@ class Firebase:
 
     @beartype
     def access_firestore(self) -> None:
-        db = firestore.client()
+        firestore.client()
