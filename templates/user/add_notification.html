@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 {% include 'theme/header.html' %}
+
 <body>
 
 
@@ -14,16 +15,22 @@
             {% csrf_token %}
             <div class="row mb-4">
 
+                <datalist id="service_locations">
+                    {% for location in locations %}
+                        <option value="{{ location.location_id }}">{{ location.location_name }}</option>
+                    {% endfor %}
+                </datalist>
+
                 <div class="col-6 mb-4">
                     <div class="form-outline">
-                        <input required class="form-control" type="text" name="leaving_from">
+                        <input list="service_locations" required class="form-control" type="text" name="leaving_from">
                         <label class="form-label">Leaving From </label>
                     </div>
                 </div>
 
                 <div class="col-6 mb-4">
                     <div class="form-outline">
-                        <input required class="form-control" type="text" name="going_to">
+                        <input list="service_locations" required class="form-control" type="text" name="going_to">
                         <label class="form-label">Going To </label>
                     </div>
                 </div>
@@ -44,8 +51,8 @@
 
                 <div class="col-6 mb-4">
                     <div class="form-outline">
-                        <input class="form-control" type="time" name="time_interval">
-                        <label class="form-label">Time Interval</label>
+                        <input class="form-control" type="number" name="time_interval">
+                        <label class="form-label">Time Interval (Minutes)</label>
                     </div>
                 </div>
 
