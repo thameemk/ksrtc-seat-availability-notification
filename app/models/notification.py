@@ -10,7 +10,7 @@ from beartype import beartype
 from fireo.fields import ReferenceField, BooleanField, DateTime, NumberField
 from fireo.models import Model
 
-from app.models import LocationModel, UserModel
+from models import LocationModel, UserModel
 
 
 class NotificationModel(Model):
