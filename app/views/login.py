@@ -11,7 +11,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
-from app.libs import FirebaseAuth
+from app.libs import Firebase
 from app.models import UserModel
 
 
@@ -24,7 +24,7 @@ class Login:
         # todo - fix csrf token in login.html
         # todo - add full name in login.html
         # todo - submit phone number & otp button loader
-        auth_user = FirebaseAuth().validate_token(request.headers['Bearer'])
+        auth_user = Firebase().validate_token(request.headers['Bearer'])
         user = UserModel.get_user(auth_user['uid'])
         if user is None:
             user = UserModel.save_user(auth_user['uid'], auth_user['phone_number'], "Guest")
