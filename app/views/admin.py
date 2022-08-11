@@ -46,9 +46,9 @@ class Admin:
     def update_locations(request: WSGIRequest) -> 'HttpResponse':
         response = Admin._fetch_locations()
         if response is True:
-            messages.success(request, 'Location update successful')
+            messages.success(request, 'The location was successfully updated.')
         else:
-            messages.error(request, 'Location update failed')
+            messages.error(request, 'Some sort of error has occurred.')
 
         return redirect('/admin/locations/')
 
