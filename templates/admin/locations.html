@@ -9,6 +9,22 @@
 
 <section class="container">
     <h3 class="fw-bold m-3 text-center">KSRTC Service Locations</h3>
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'success' %}
+                <div class="alert alert-dismissible fade show alert-success" role="alert" data-mdb-color="warning">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-mdb-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endif %}
+            {% if message.tags == 'error' %}
+                <div class="alert alert-dismissible fade show alert-danger" role="alert" data-mdb-color="warning">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-mdb-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
 
 
     <!-- Modal -->
@@ -22,7 +38,7 @@
                 <div class="modal-body">Do you want to make changes to the service locations?</div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary">Update</button>
+                    <a href="/admin/update_locations" type="button" class="btn btn-primary">Update</a>
                 </div>
             </div>
         </div>
