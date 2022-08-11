@@ -2,16 +2,10 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <!-- Container wrapper -->
     <div class="container">
-        <!-- Navbar brand -->
-        <a class="navbar-brand me-2" href="#">
-            <img
-                    src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
-                    height="16"
-                    alt="MDB Logo"
-                    loading="lazy"
-                    style="margin-top: -1px;"
-            />
-        </a>
+
+        <a class="btn btn-dark px-3" target="_blank"
+           href="https://github.com/thameemk612/ksrtc-seat-availability-notification"
+           role="button"><i class="fab fa-github"></i></a>
 
         <!-- Toggle button -->
         <button
@@ -30,21 +24,25 @@
         <div class="collapse navbar-collapse" id="navbarButtonsExample">
             <!-- Left links -->
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="/user/home">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/admin/locations">Locations</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/user/notifications">Notifications</a>
-                </li>
+                {% if 'user' in request.session %}
 
-                <li class="nav-item">
-                    <a class="nav-link" href="/user/add_notification">Add Notification</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/locations">Locations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/notifications">Notifications</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/add_notification">Add Notification</a>
+                    </li>
+                {% endif %}
             </ul>
             <!-- Left links -->
+
 
             <div class="d-flex align-items-center">
                 {% if 'user' in request.session %}
@@ -57,9 +55,16 @@
                     </a>
                 {% endif %}
 
-                <a class="btn btn-dark px-3" target="_blank"
-                   href="https://github.com/thameemk612/ksrtc-seat-availability-notification"
-                   role="button"><i class="fab fa-github"></i></a>
+                <!-- Button trigger modal -->
+
+                {% if request.path == '/admin/locations/' %}
+                    <button type="button" class="btn btn-primary px-3 me-2" data-mdb-toggle="modal"
+                            data-mdb-target="#update_locations">
+                        Update Locations
+                    </button>
+                {% endif %}
+
+
             </div>
         </div>
         <!-- Collapsible wrapper -->

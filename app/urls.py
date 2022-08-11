@@ -14,6 +14,7 @@ urlpatterns = [
     path('auth/logout/', Login.logout),
     path('auth/callback/', Login.auth_callback),
 
+    path('admin/update_locations/', Admin.update_locations),
     path('user/save_notification/', User.save_notification),
 
     path('admin/<page>/', Admin.dynamic_pages),
