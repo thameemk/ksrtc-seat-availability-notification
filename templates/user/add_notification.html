@@ -10,6 +10,22 @@
 
 <section class="container">
     <h3 class="fw-bold m-3 text-center">Add New Notification</h3>
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'success' %}
+                <div class="alert alert-dismissible fade show alert-success" role="alert" data-mdb-color="warning">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-mdb-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endif %}
+            {% if message.tags == 'error' %}
+                <div class="alert alert-dismissible fade show alert-danger" role="alert" data-mdb-color="warning">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-mdb-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
     <center>
         <form method="post" action="/user/save_notification/" class="col-lg-6  col-md-12">
             {% csrf_token %}

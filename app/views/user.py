@@ -6,6 +6,7 @@
 from datetime import datetime
 
 from beartype import beartype
+from django.contrib import messages
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -53,8 +54,8 @@ class User:
         notification = NotificationModel.save_notification(_notification_obj)
 
         if notification:
-            pass
+            messages.success(request, 'The notification was successfully added.')
         else:
-            pass
+            messages.error(request, 'Some sort of error has occurred.')
 
-        return redirect('user/add_notification')
+        return redirect('/user/add_notification')

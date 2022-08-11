@@ -8,9 +8,10 @@ import json
 import requests
 from beartype import beartype
 from bs4 import BeautifulSoup
+from django.contrib import messages
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from libs import authenticate
 from main.settings import KSRTC_HOME_URL
@@ -22,7 +23,7 @@ class Admin:
 
     @staticmethod
     @beartype
-    def _fetch_locations() -> list[LocationModel]:
+    def _fetch_locations() -> bool:
         response = requests.post(KSRTC_HOME_URL, headers={'User-Agent': 'Mozilla/5.0'})
         if response.status_code == 200:
             soup = BeautifulSoup(response.content, 'lxml')
@@ -34,10 +35,22 @@ class Admin:
                 locations.append(
                     LocationModel.save_location(location_id=location['id'], location_name=location['value']))
 
-            return locations
+            return True
 
         else:
             raise Exception(f"{response.status_code}")
+
+    @staticmethod
+    @beartype
+    @authenticate
+    def update_locations(request: WSGIRequest) -> 'HttpResponse':
+        response = Admin._fetch_locations()
+        if response is True:
+            messages.success(request, 'The location was successfully updated.')
+        else:
+            messages.error(request, 'Some sort of error has occurred.')
+
+        return redirect('/admin/locations/')
 
     @staticmethod
     @beartype
