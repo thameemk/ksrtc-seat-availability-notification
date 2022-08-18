@@ -15,10 +15,13 @@ pendulum = "*"
 firebase-admin = "*"
 tzdata = "*"
 deny = "*"
+selenium = "*"
+webdriver-manager = "*"
 
 [dev-packages]
 flake8 = "*"
 flake8-annotations = "*"
+pre-commit = "*"
 
 [requires]
 python_version = "3.10"
