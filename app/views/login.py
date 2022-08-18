@@ -12,7 +12,7 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
 from app.libs import Firebase
-from models import UserModel
+from app.models import UserModel
 
 
 class Login:

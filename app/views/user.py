@@ -12,7 +12,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 from app.libs import authenticate
-from models import NotificationModel, LocationModel, UserModel
+from app.models import NotificationModel, LocationModel, UserModel
 
 
 class User:
