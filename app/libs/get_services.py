@@ -20,7 +20,7 @@ from main.settings import KSRTC_HOME_URL
 class GetServices:
 
     @beartype
-    def post(self, leaving_from: str, going_to: str, journey_date) -> None:
+    def post(self, leaving_from: str, going_to: str, journey_date: str) -> None:
         driver = webdriver.Firefox(service=Service(GeckoDriverManager().install()))
         driver.get(KSRTC_HOME_URL)
 
