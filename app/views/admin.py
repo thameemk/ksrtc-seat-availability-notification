@@ -13,10 +13,10 @@ from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
-from libs import authenticate
+from app.libs import authenticate
 from main.settings import KSRTC_HOME_URL
 
-from models import LocationModel
+from app.models import LocationModel
 
 
 class Admin:
@@ -56,7 +56,7 @@ class Admin:
     @beartype
     @authenticate
     def dynamic_pages(request: WSGIRequest, page: str) -> 'HttpResponse':
-        from models import LocationModel
+        from app.models import LocationModel
         data = {'locations': LocationModel.get_all_locations(),
                 'page_title': f"{request.session['user_name']} - {page.title()} | KSRTC Seat Availability Notification"}
         return render(request, f'admin/{page}.html', data)
