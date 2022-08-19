@@ -17,6 +17,7 @@ tzdata = "*"
 deny = "*"
 selenium = "*"
 webdriver-manager = "*"
+gunicorn = "*"
 
 [dev-packages]
 flake8 = "*"
