@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-+auvzvz06)$8ge+&&dety5a(b+!ppo)ep@tusho26^26c*2=bn
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '127.0.0.1'
+    '127.0.0.1',
     'ksrtc.thameem.me'
 ]
 
