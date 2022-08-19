@@ -77,6 +77,7 @@ WSGI_APPLICATION = 'main.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+
 ON_HEROKU = os.environ.get('ON_HEROKU')
 
 if ON_HEROKU:
