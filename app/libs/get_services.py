@@ -22,14 +22,19 @@ class GetServices:
     @beartype
     def _set_location(self, location: str, location_key: str, location_response_key: str) -> None:
         time.sleep(3)
-        start_place_id = self.driver.find_element(By.ID, location_key)
-        start_place_id.send_keys(location)
+        location_info = self.driver.find_element(By.ID, location_key)
+        location_info.send_keys(location)
         time.sleep(3)
         self.driver.find_elements(By.ID, location_response_key)[0].click()
 
     @beartype
     def _set_journey_date(self, date: str, date_key: str) -> None:
-        pass
+        time.sleep(3)
+        calendar = self.driver.find_element(By.ID, date_key)
+        # calendar = self.driver.find_element(By.XPATH, "/html/body/div[6]/table/tbody/tr[2]/td[4]")
+        calendar.click()
+        calendar.send_keys(date)
+        time.sleep(3)
 
     @beartype
     def post(self, leaving_from: str, going_to: str, journey_date: str) -> None:
