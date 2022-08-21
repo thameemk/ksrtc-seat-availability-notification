@@ -6,42 +6,49 @@
 import time
 
 from beartype import beartype
-from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.service import Service
-from selenium.webdriver.support.wait import WebDriverWait
 from webdriver_manager.firefox import GeckoDriverManager
-from selenium.webdriver.support import expected_conditions as ec
 
 from main.settings import KSRTC_HOME_URL
 
 
 class GetServices:
 
+    def __init__(self) -> None:
+        self.driver = None
+
+    @beartype
+    def _set_location(self, location: str, location_key: str, location_response_key: str) -> None:
+        time.sleep(3)
+        start_place_id = self.driver.find_element(By.ID, location_key)
+        start_place_id.send_keys(location)
+        time.sleep(3)
+        self.driver.find_elements(By.ID, location_response_key)[0].click()
+
+    @beartype
+    def _set_journey_date(self, date: str, date_key: str) -> None:
+        pass
+
     @beartype
     def post(self, leaving_from: str, going_to: str, journey_date: str) -> None:
-        driver = webdriver.Firefox(service=Service(GeckoDriverManager().install()))
-        driver.get(KSRTC_HOME_URL)
+        self.driver = webdriver.Firefox(service=Service(GeckoDriverManager().install()))
+        self.driver.get(KSRTC_HOME_URL)
 
-        wait = WebDriverWait(driver, 15)
-        wait.until(ec.element_to_be_clickable((By.NAME, "startPlaceId"))).send_keys(leaving_from)
+        self._set_location(leaving_from, 'fromPlaceName', 'ui-id-3')
+        self._set_location(going_to, 'toPlaceName', 'ui-id-4')
+        self._set_journey_date(journey_date, 'txtJourneyDate')
 
-        # driver.find_element(By.NAME, 'startPlaceId').send_keys('value', leaving_from)
-        # driver.find_elements(By.ID, "ui-id-3")[0].click()
-        time.sleep(3)
-        driver.find_element(By.ID, 'endPlaceId').send_keys("TRIVANDRUM")
-        time.sleep(3)
-        driver.find_element(By.ID, 'txtJourneyDate').send_keys(journey_date)
-        time.sleep(3)
-        driver.find_element(By.ID, 'searchBtn').click()
+        self.driver.find_element(By.ID, "searchBtn").click()
         time.sleep(5)
-        response = BeautifulSoup(driver.page_source, 'html.parser')
 
-        print(response.prettify())
+        response = self.driver.page_source
+
+        print(response)
 
 
 if __name__ == '__main__':
-    GetServices().post(leaving_from="1540487668225",
-                       going_to="1540485175138",
+    GetServices().post(leaving_from="TRIVANDRUM",
+                       going_to="KOZHIKODE",
                        journey_date='28/08/2022')
