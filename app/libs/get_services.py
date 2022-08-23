@@ -3,42 +3,29 @@
 #  Author : thameem
 #  Current modification time : Mon, 15 Aug 2022 at 7:52 pm India Standard Time
 #  Last modified time : Mon, 15 Aug 2022 at 7:52 pm India Standard Time
-import time
-
+import requests
 from beartype import beartype
-from bs4 import BeautifulSoup
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.firefox.service import Service
-from selenium.webdriver.support.wait import WebDriverWait
-from webdriver_manager.firefox import GeckoDriverManager
-from selenium.webdriver.support import expected_conditions as ec
 
-from main.settings import KSRTC_HOME_URL
+from main.settings import POST_URL
 
 
 class GetServices:
 
+    @staticmethod
     @beartype
-    def post(self, leaving_from: str, going_to: str, journey_date: str) -> None:
-        driver = webdriver.Firefox(service=Service(GeckoDriverManager().install()))
-        driver.get(KSRTC_HOME_URL)
+    def post(leaving_from: str, going_to: str, journey_date: str) -> None:
+        url = POST_URL
 
-        wait = WebDriverWait(driver, 15)
-        wait.until(ec.element_to_be_clickable((By.NAME, "startPlaceId"))).send_keys(leaving_from)
+        url = url.replace('journey_date', journey_date)
+        url = url.replace('leaving_from', leaving_from)
+        url = url.replace('going_to', going_to)
 
-        # driver.find_element(By.NAME, 'startPlaceId').send_keys('value', leaving_from)
-        # driver.find_elements(By.ID, "ui-id-3")[0].click()
-        time.sleep(3)
-        driver.find_element(By.ID, 'endPlaceId').send_keys("TRIVANDRUM")
-        time.sleep(3)
-        driver.find_element(By.ID, 'txtJourneyDate').send_keys(journey_date)
-        time.sleep(3)
-        driver.find_element(By.ID, 'searchBtn').click()
-        time.sleep(5)
-        response = BeautifulSoup(driver.page_source, 'html.parser')
+        response = requests.post(url=url, headers={'User-Agent': 'Mozilla/5.0'})
 
-        print(response.prettify())
+        if response.status_code == 200:
+            pass
+        else:
+            raise Exception(f"some error has been occurred on requesting services - {response.status_code}")
 
 
 if __name__ == '__main__':
