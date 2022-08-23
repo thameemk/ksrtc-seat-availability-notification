@@ -15,8 +15,6 @@ pendulum = "*"
 firebase-admin = "*"
 tzdata = "*"
 deny = "*"
-selenium = "*"
-webdriver-manager = "*"
 gunicorn = "*"
 
 [dev-packages]
