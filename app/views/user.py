@@ -13,6 +13,7 @@ from django.shortcuts import render, redirect
 
 from app.libs import authenticate
 from app.models import NotificationModel, LocationModel, UserModel
+from libs.get_services import GetServices
 
 
 class User:
@@ -40,13 +41,19 @@ class User:
 
         user = UserModel.get_user(firebase_uid=request.session['user'])
 
+        date_of_departure = datetime.strptime(request.POST['date_of_departure'], "%Y-%m-%d")
+
+        available_seats = GetServices.get_total_seats(request.POST['leaving_from'], request.POST['going_to'],
+                                                      date_of_departure.date())
+
         _notification_obj = NotificationModel(
             leaving_from=leaving_from,
             going_to=going_to,
-            date_of_departure=datetime.strptime(request.POST['date_of_departure'], "%Y-%m-%d"),
+            date_of_departure=date_of_departure,
             date_of_return=datetime.strptime(request.POST['date_of_return'], "%Y-%m-%d") if request.POST[
                 'date_of_return'] else None,
             user=user,
+            available_seats=available_seats,
             time_interval=int(request.POST['time_interval']),
             receive_notification_up_to=datetime.strptime(request.POST['receive_notification_up_to'], "%Y-%m-%d"),
         )

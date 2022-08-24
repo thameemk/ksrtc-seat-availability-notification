@@ -9,27 +9,52 @@
 
 <section class="container">
     <h3 class="fw-bold m-3 text-center">My Notifications</h3>
+    <!-- Modal -->
+    <div class="modal fade" id="notification_status_update" tabindex="-1" aria-labelledby="notificationStatusUpdate"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="notificationStatusUpdate">Confirm your action</h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">Do you want to update the notification status?</div>
+                <div class="modal-footer">
+                    <a href="/user/disable_notification" type="button" class="btn btn-danger">Disable</a>
+                    <a href="/user/update_seats" type="button" class="btn btn-success">Update Seats</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <table class="table">
         <thead class="table-dark">
-        <th class="text-center">ID</th>
         <th class="text-center">Leaving From</th>
         <th class="text-center">Going To</th>
         <th class="text-center">Departure Date</th>
         <th class="text-center">Return Date</th>
+        <th class="text-center">Available Seats</th>
         <th class="text-center">Time Interval</th>
         <th class="text-center">Expiry Date</th>
         <th class="text-center">Status</th>
         </thead>
         {% for notification in notifications %}
             <tbody>
-            <td class="text-center">{{ notification.id }}</td>
             <td class="text-center">{{ notification.leaving_from.location_name }}</td>
             <td class="text-center">{{ notification.going_to.location_name }}</td>
             <td class="text-center">{{ notification.date_of_departure }}</td>
             <td class="text-center">{{ notification.date_of_return }}</td>
+            <td class="text-center">{{ notification.available_seats }}</td>
             <td class="text-center">{{ notification.time_interval }}</td>
             <td class="text-center">{{ notification.receive_notification_up_to }}</td>
-            <td class="text-center">{{ notification.is_active }}</td>
+            <td class="text-center">
+                {% if notification.is_active is True %}
+                    <button type="button" class="btn btn-success" data-mdb-toggle="modal"
+                            data-mdb-target="#notification_status_update">Update
+                    </button>
+                {% else %}
+                    <button type="button" class="btn btn-danger" disabled>Expired</button>
+                {% endif %}
+            </td>
             </tbody>
         {% endfor %}
     </table>
