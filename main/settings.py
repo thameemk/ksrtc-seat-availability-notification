@@ -139,5 +139,5 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-KSRTC_HOME_URL = config('KSRTC_HOME_URL', default="")
-POST_URL = config('POST_URL', default="")
+KSRTC_HOME_URL = config('KSRTC_HOME_URL')
+POST_URL = config('POST_URL')
