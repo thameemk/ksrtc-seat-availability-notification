@@ -3,6 +3,8 @@
 #  Author : thameem
 #  Current modification time : Mon, 15 Aug 2022 at 7:52 pm India Standard Time
 #  Last modified time : Mon, 15 Aug 2022 at 7:52 pm India Standard Time
+from datetime import date
+
 import requests
 from beartype import beartype
 from bs4 import BeautifulSoup
@@ -14,10 +16,10 @@ class GetServices:
 
     @staticmethod
     @beartype
-    def get_total_seats(leaving_from: str, going_to: str, journey_date: str) -> int:
+    def get_total_seats(leaving_from: str, going_to: str, journey_date: date) -> int:
         url = POST_URL
 
-        url = url.replace('journey_date', journey_date)
+        url = url.replace('journey_date', journey_date.strftime('%d/%m/%Y'))
         url = url.replace('leaving_from', leaving_from)
         url = url.replace('going_to', going_to)
 
