@@ -11,7 +11,6 @@
     <h3 class="fw-bold m-3 text-center">My Notifications</h3>
     <table class="table">
         <thead class="table-dark">
-        <th class="text-center">ID</th>
         <th class="text-center">Leaving From</th>
         <th class="text-center">Going To</th>
         <th class="text-center">Departure Date</th>
@@ -23,7 +22,6 @@
         </thead>
         {% for notification in notifications %}
             <tbody>
-            <td class="text-center">{{ notification.id }}</td>
             <td class="text-center">{{ notification.leaving_from.location_name }}</td>
             <td class="text-center">{{ notification.going_to.location_name }}</td>
             <td class="text-center">{{ notification.date_of_departure }}</td>
@@ -31,7 +29,13 @@
             <td class="text-center">{{ notification.available_seats }}</td>
             <td class="text-center">{{ notification.time_interval }}</td>
             <td class="text-center">{{ notification.receive_notification_up_to }}</td>
-            <td class="text-center">{{ notification.is_active }}</td>
+            <td class="text-center">
+                {% if notification.is_active is True %}
+                    <button type="button" class="btn btn-success">Update</button>
+                {% else %}
+                    <button type="button" class="btn btn-danger" disabled>Expired</button>
+                {% endif %}
+            </td>
             </tbody>
         {% endfor %}
     </table>
