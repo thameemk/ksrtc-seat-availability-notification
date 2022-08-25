@@ -2,6 +2,8 @@
 <!DOCTYPE html>
 <html lang="en">
 {% include 'theme/header.html' %}
+
+
 <body>
 
 
@@ -9,6 +11,22 @@
 
 <section class="container">
     <h3 class="fw-bold m-3 text-center">My Notifications</h3>
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'success' %}
+                <div class="alert alert-dismissible fade show alert-success" role="alert" data-mdb-color="warning">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-mdb-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endif %}
+            {% if message.tags == 'error' %}
+                <div class="alert alert-dismissible fade show alert-danger" role="alert" data-mdb-color="warning">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-mdb-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
     <!-- Modal -->
     <div class="modal fade" id="notification_status_update" tabindex="-1" aria-labelledby="notificationStatusUpdate"
          aria-hidden="true">
@@ -20,8 +38,12 @@
                 </div>
                 <div class="modal-body">Do you want to update the notification status?</div>
                 <div class="modal-footer">
-                    <a href="/user/disable_notification" type="button" class="btn btn-danger">Disable</a>
-                    <a href="/user/update_seats" type="button" class="btn btn-success">Update Seats</a>
+                    <a id="disable_notification" href="/user/disable_notification/" type="button"
+                       class="btn btn-danger">
+                        Disable
+                    </a>
+                    <a id="update_seats" href="/user/update_seats/" type="button" class="btn btn-success">Update
+                        Seats</a>
                 </div>
             </div>
         </div>
@@ -48,7 +70,10 @@
             <td class="text-center">{{ notification.receive_notification_up_to }}</td>
             <td class="text-center">
                 {% if notification.is_active is True %}
-                    <button type="button" class="btn btn-success" data-mdb-toggle="modal"
+                    <button type="button"
+                            id="{{ notification.id }}"
+                            class="updateNotificationStatus btn btn-success"
+                            data-mdb-toggle="modal"
                             data-mdb-target="#notification_status_update">Update
                     </button>
                 {% else %}
@@ -59,6 +84,17 @@
         {% endfor %}
     </table>
 </section>
+
+<script>
+    $(document).ready(function () {
+        //on click modal button
+        $(".updateNotificationStatus").on("click", function () {
+            var notification_id = this.id; //get notification id
+            $("#disable_notification").attr('href', '/user/disable_notification/' + notification_id);
+            $("#update_seats").attr('href', '/user/update_seats/' + notification_id);
+        })
+    });
+</script>
 
 
 {% include 'theme/firebase.html' %}
