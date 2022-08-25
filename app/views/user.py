@@ -66,3 +66,25 @@ class User:
             messages.error(request, 'Some sort of error has occurred.')
 
         return redirect('/user/add_notification')
+
+    @staticmethod
+    @beartype
+    def disable_notification(request: WSGIRequest, notification_id: str) -> 'HttpResponse':
+        response = True
+        if response is True:
+            messages.success(request, f'notification with id {notification_id} successfully disabled')
+        else:
+            messages.error(request, 'Some sort of error has occurred.')
+
+        return redirect('/user/notifications/')
+
+    @staticmethod
+    @beartype
+    def update_seats(request: WSGIRequest, notification_id: str) -> 'HttpResponse':
+        response = True
+        if response is True:
+            messages.success(request, f'notification with id {notification_id} updated successfully')
+        else:
+            messages.error(request, 'Some sort of error has occurred.')
+
+        return redirect('/user/notifications/')
