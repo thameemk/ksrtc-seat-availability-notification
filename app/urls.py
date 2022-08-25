@@ -16,9 +16,10 @@ urlpatterns = [
 
     path('admin/update_locations/', Admin.update_locations),
     path('user/save_notification/', User.save_notification),
+    path('user/update_seats/<notification_id>', User.update_seats),
+    path('user/disable_notification/<notification_id>', User.disable_notification),
 
     path('admin/<page>/', Admin.dynamic_pages),
     path('user/<page>/', User.dynamic_pages),
-
 
 ]
