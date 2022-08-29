@@ -38,3 +38,15 @@ class NotificationModel(Model):
     @beartype
     def save_notification(cls, notification: 'NotificationModel') -> 'NotificationModel':
         return notification.save()
+
+    @classmethod
+    @beartype
+    def get_notification(cls, user: str, notification_id: str) -> 'NotificationModel':
+        a = NotificationModel(id=notification_id)
+        try:
+            # todo - not working - why?
+            _notification = cls.collection.get(a.key)
+            if _notification.user.key == f'users/{user}':
+                return _notification
+        except Exception:
+            raise Exception("no matching model found with th requested id")

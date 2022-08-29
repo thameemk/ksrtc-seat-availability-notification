@@ -70,6 +70,7 @@ class User:
     @staticmethod
     @beartype
     def disable_notification(request: WSGIRequest, notification_id: str) -> 'HttpResponse':
+        notification_obj = NotificationModel.get_notification(request.session['user'], notification_id)
         response = True
         if response is True:
             messages.success(request, f'notification with id {notification_id} successfully disabled')
