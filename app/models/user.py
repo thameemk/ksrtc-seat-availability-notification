@@ -4,6 +4,7 @@
 #  Current modification time : Thu, 19 May 2022 at 8:06 PM India Standard Time
 #  Last modified time : Wed, 18 May 2022 at 11:50 PM India Standard Time
 from datetime import datetime
+from functools import lru_cache
 from typing import Optional
 
 from beartype import beartype
@@ -34,6 +35,7 @@ class UserModel(Model):
         return user
 
     @classmethod
+    @lru_cache
     @beartype
     def get_user(cls, firebase_uid: str) -> Optional['UserModel']:
         _user = UserModel(uid=firebase_uid)
