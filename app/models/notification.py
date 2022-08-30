@@ -7,7 +7,7 @@ from datetime import datetime
 from typing import Optional
 
 from beartype import beartype
-from fireo.fields import ReferenceField, BooleanField, DateTime, NumberField
+from fireo.fields import ReferenceField, BooleanField, DateTime, NumberField, IDField
 from fireo.models import Model
 
 from app.models import LocationModel, UserModel
@@ -17,6 +17,7 @@ class NotificationModel(Model):
     class Meta:
         collection_name = "notifications"
 
+    notification_id = IDField(required=True)
     leaving_from = ReferenceField(LocationModel, required=True)
     going_to = ReferenceField(LocationModel, required=True)
     date_of_departure = DateTime(required=True)
@@ -42,10 +43,9 @@ class NotificationModel(Model):
     @classmethod
     @beartype
     def get_notification(cls, user: str, notification_id: str) -> 'NotificationModel':
-        a = NotificationModel(id=notification_id)
+        _notification = cls(notification_id=notification_id)
         try:
-            # todo - not working - why?
-            _notification = cls.collection.get(a.key)
+            _notification = cls.collection.get(_notification.key)
             if _notification.user.key == f'users/{user}':
                 return _notification
         except Exception:
