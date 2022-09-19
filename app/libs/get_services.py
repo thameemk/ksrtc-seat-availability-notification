@@ -27,10 +27,11 @@ class GetServices:
 
         if response.status_code == 200:
             soup = BeautifulSoup(response.content, 'lxml')
-            seats_div = soup.findAll('div', class_='seats-count')
-            total_seats = 0
-            for each in seats_div:
-                total_seats += int(each.find('h4').text.strip().replace("Seats", ""))
+            seats_div = soup.find(id="fwTotalServicesId")
+            try:
+                total_seats = seats_div.text()
+            except Exception:
+                total_seats = 0
             return total_seats
         else:
             raise Exception(f"some error has been occurred on requesting services - {response.status_code}")
