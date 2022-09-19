@@ -1,7 +1,7 @@
 **_KSRTC (Kerala State Road Transport Corporation) Seat Availability Notification System_**
 
 ```diff
--_**The application and concept developed are solely for educational purposes.**._ 
+- The application and concept developed are solely for educational purposes. 
 ```
 
 _An application that notifies the newly added trips and seats in KSRTC (Kerala State Road Transport Corporation) online booking platform_
