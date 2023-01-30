@@ -10,13 +10,13 @@
 // firebase configuration
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAZTy6_ju9ivkIZGzezM_Z1rEVT7VBNPdI",
-    authDomain: "ksrtc-notification-system.firebaseapp.com",
-    databaseURL: "https://ksrtc-notification-system-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "ksrtc-notification-system",
-    storageBucket: "ksrtc-notification-system.appspot.com",
-    messagingSenderId: "349088019332",
-    appId: "1:349088019332:web:e8cbaa5568c2e871a6a3d1"
+    apiKey: "AIzaSyC4xUTtkqY_PzmJq9uwJ4Cg6FqExVe9ALs",
+    authDomain: "development-375416.firebaseapp.com",
+    projectId: "development-375416",
+    storageBucket: "development-375416.appspot.com",
+    messagingSenderId: "1048197151318",
+    appId: "1:1048197151318:web:8eecbe8a0c9c9a03e899f7"
+
 };
 //initialise firebase
 firebase.initializeApp(firebaseConfig);
