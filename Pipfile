@@ -21,6 +21,8 @@ gunicorn = "*"
 flake8 = "*"
 flake8-annotations = "*"
 pre-commit = "*"
+pytest = "*"
+pytest-dependency = "*"
 
 [requires]
 python_version = "3.10"
