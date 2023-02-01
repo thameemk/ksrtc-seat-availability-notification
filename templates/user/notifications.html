@@ -56,7 +56,6 @@
         <th class="text-center">Return Date</th>
         <th class="text-center">Available Seats</th>
         <th class="text-center">Time Interval</th>
-        <th class="text-center">Expiry Date</th>
         <th class="text-center">Status</th>
         </thead>
         {% for notification in notifications %}
@@ -66,8 +65,7 @@
             <td class="text-center">{{ notification.date_of_departure }}</td>
             <td class="text-center">{{ notification.date_of_return }}</td>
             <td class="text-center">{{ notification.available_seats }}</td>
-            <td class="text-center">{{ notification.time_interval }}</td>
-            <td class="text-center">{{ notification.receive_notification_up_to }}</td>
+            <td class="text-center">{{ notification.time_interval }} minutes</td>
             <td class="text-center">
                 {% if notification.is_active is True %}
                     <button type="button"
