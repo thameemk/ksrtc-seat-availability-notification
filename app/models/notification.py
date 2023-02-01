@@ -26,7 +26,6 @@ class NotificationModel(Model):
     is_active = BooleanField(required=True, default=True)
     time_interval = NumberField(required=True)
     available_seats = NumberField(required=True)
-    receive_notification_up_to = DateTime(required=True)
     created_on = DateTime(required=True, default=datetime.now())
     modified_on = DateTime(required=True, default=datetime.now())
 

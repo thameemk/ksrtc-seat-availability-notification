@@ -55,7 +55,6 @@ class User:
             user=user,
             available_seats=0,
             time_interval=int(request.POST['time_interval']),
-            receive_notification_up_to=datetime.strptime(request.POST['receive_notification_up_to'], "%Y-%m-%d"),
         )
 
         notification = NotificationModel.save_notification(_notification_obj)
