@@ -24,7 +24,10 @@ class User:
     @beartype
     @authenticate
     def dynamic_pages(request: WSGIRequest, page: str) -> 'HttpResponse':
-        data = {'page_title': f"{request.session['user_name']} - {page.title()} | KSRTC Seat Availability Notification"}
+        page_slugs_combined = " ".join(page.split("_"))
+        data = {
+            'page_title': f"{request.session['user_name']} - {page_slugs_combined.title()} | KSRTC Seat Availability "
+                          f"Notification"}
         if page == 'add_notification':
             data['locations'] = LocationModel.get_all_locations()
 
