@@ -63,7 +63,7 @@ class User:
         notification = NotificationModel.save_notification(_notification_obj)
 
         threading.Thread(target=User._update_available_seats,
-                         args=(request.POST['leaving_from'], request.POST['going_to'],
+                         args=(notification, request.POST['leaving_from'], request.POST['going_to'],
                                date_of_departure.date()))
 
         if notification:
@@ -101,9 +101,10 @@ class User:
         notification_obj = NotificationModel.get_notification(request.session['user'], notification_id)
 
         if notification_obj:
-            threading.Thread(target=User._update_available_seats,
-                             args=(notification_obj.leaving_from.location_id, notification_obj.going_to.location_id,
-                                   notification_obj.date_of_departure.date()))
+            threading.Thread(target=User._update_available_seats, args=(notification_obj,
+                                                                        notification_obj.leaving_from.location_id,
+                                                                        notification_obj.going_to.location_id,
+                                                                        notification_obj.date_of_departure.date()))
             messages.success(request, 'Request in progress, please refresh the page to know the available seats')
         else:
             messages.error(request, 'Some sort of error has occurred.')
