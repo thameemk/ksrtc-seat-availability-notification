@@ -3,6 +3,7 @@
 #  Author : thameem
 #  Current modification time : Mon, 15 Aug 2022 at 7:52 pm India Standard Time
 #  Last modified time : Mon, 15 Aug 2022 at 7:52 pm India Standard Time
+import logging
 from datetime import date
 
 import requests
@@ -27,10 +28,10 @@ class GetServices:
 
         if response.status_code == 200:
             soup = BeautifulSoup(response.content, 'lxml')
-            seats_div = soup.find(id="fwTotalServicesId")
             try:
-                total_seats = seats_div.text()
-            except Exception:
+                total_seats = int(soup.find('input', {'name': 'fwTotalServices'})['value'])
+            except Exception as e:
+                logging.error(str(e))
                 total_seats = 0
             return total_seats
         else:

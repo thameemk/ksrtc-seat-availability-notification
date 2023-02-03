@@ -3,7 +3,7 @@
 #  Author : thameem
 #  Current modification time : Thu, 19 May 2022 at 8:06 PM India Standard Time
 #  Last modified time : Wed, 18 May 2022 at 11:36 PM India Standard Time
-from datetime import datetime
+import datetime
 from typing import Optional
 
 from beartype import beartype
@@ -26,8 +26,8 @@ class NotificationModel(Model):
     is_active = BooleanField(required=True, default=True)
     time_interval = NumberField(required=True)
     available_seats = NumberField(required=True)
-    created_on = DateTime(required=True, default=datetime.now())
-    modified_on = DateTime(required=True, default=datetime.now())
+    created_on = DateTime(required=True, default=datetime.datetime.utcnow() + datetime.timedelta(hours=5, minutes=30))
+    modified_on = DateTime(required=True, default=datetime.datetime.utcnow() + datetime.timedelta(hours=5, minutes=30))
 
     @classmethod
     @beartype
