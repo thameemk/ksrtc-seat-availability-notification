@@ -5,7 +5,7 @@
 #  Last modified time : Mon, 23 May 2022 at 12:05 AM India Standard Time
 import threading
 import uuid
-from datetime import datetime, date
+import datetime
 
 from beartype import beartype
 from django.contrib import messages
@@ -46,14 +46,14 @@ class User:
 
         user = UserModel.get_user(firebase_uid=request.session['user'])
 
-        date_of_departure = datetime.strptime(request.POST['date_of_departure'], "%Y-%m-%d")
+        date_of_departure = datetime.datetime.strptime(request.POST['date_of_departure'], "%Y-%m-%d")
 
         _notification_obj = NotificationModel(
             notification_id=uuid.uuid4().hex,
             leaving_from=leaving_from,
             going_to=going_to,
             date_of_departure=date_of_departure,
-            date_of_return=datetime.strptime(request.POST['date_of_return'], "%Y-%m-%d") if request.POST[
+            date_of_return=datetime.datetime.strptime(request.POST['date_of_return'], "%Y-%m-%d") if request.POST[
                 'date_of_return'] else None,
             user=user,
             available_seats=0,
@@ -62,10 +62,10 @@ class User:
 
         notification = NotificationModel.save_notification(_notification_obj)
 
-        threading.Thread(target=User._update_available_seats,
-                         args=(notification, request.POST['leaving_from'], request.POST['going_to'],
-                               date_of_departure.date()))
-
+        threading.Thread(target=User._update_available_seats, args=(notification,
+                                                                    notification.leaving_from.location_id,
+                                                                    notification.going_to.location_id,
+                                                                    notification.date_of_departure.date()))
         if notification:
             messages.success(request, 'Request in progress, please refresh the page to know the available seats')
         else:
@@ -76,10 +76,11 @@ class User:
     @staticmethod
     @beartype
     def _update_available_seats(notification: NotificationModel, leaving_from: str, going_to: str,
-                                journey_date: date) -> None:
+                                journey_date: datetime.date) -> None:
 
         available_seats = GetServices.get_total_seats(leaving_from, going_to, journey_date)
         notification.available_seats = available_seats
+        notification.modified_on = datetime.datetime.utcnow() + datetime.timedelta(hours=5, minutes=30)
         notification.update()
 
     @staticmethod
