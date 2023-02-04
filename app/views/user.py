@@ -68,10 +68,10 @@ class User:
         if notification:
             messages.success(request,
                              'Success! New notification added for trip {trip_name}')
+            return redirect('/user/notifications/')
         else:
             messages.error(request, 'Error! Some sort of error has occurred.')
-
-        return redirect('/user/add_notification')
+            return redirect('/user/add_notification')
 
     @staticmethod
     @beartype
