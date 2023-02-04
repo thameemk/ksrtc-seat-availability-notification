@@ -57,7 +57,7 @@ class User:
                 'date_of_return'] else None,
             user=user,
             available_seats=0,
-            time_interval=int(request.POST['time_interval']),
+            time_interval=int(request.POST['time_interval']) if request.POST['time_interval'] else 30,
         )
 
         notification = NotificationModel.save_notification(_notification_obj)
