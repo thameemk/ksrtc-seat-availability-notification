@@ -7,7 +7,7 @@ import datetime
 from typing import Optional
 
 from beartype import beartype
-from fireo.fields import ReferenceField, BooleanField, DateTime, NumberField, IDField
+from fireo.fields import ReferenceField, BooleanField, DateTime, NumberField, IDField, TextField
 from fireo.models import Model
 
 from app.models import LocationModel, UserModel
@@ -18,6 +18,7 @@ class NotificationModel(Model):
         collection_name = "notifications"
 
     notification_id = IDField(required=True)
+    trip_name = TextField(required=True)
     leaving_from = ReferenceField(LocationModel, required=True)
     going_to = ReferenceField(LocationModel, required=True)
     date_of_departure = DateTime(required=True)

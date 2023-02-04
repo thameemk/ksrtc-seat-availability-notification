@@ -49,6 +49,7 @@ class User:
 
         _notification_obj = NotificationModel(
             notification_id=uuid.uuid4().hex,
+            trip_name=request.POST['trip_name'],
             leaving_from=leaving_from,
             going_to=going_to,
             date_of_departure=date_of_departure,

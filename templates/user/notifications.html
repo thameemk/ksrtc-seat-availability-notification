@@ -50,6 +50,7 @@
     </div>
     <table class="table">
         <thead class="table-dark">
+        <th class="text-center">Trip Name</th>
         <th class="text-center">Leaving From</th>
         <th class="text-center">Going To</th>
         <th class="text-center">Departure Date</th>
@@ -61,6 +62,7 @@
         </thead>
         {% for notification in notifications %}
             <tbody>
+            <td class="text-center">{{ notification.trip_name }}</td>
             <td class="text-center">{{ notification.leaving_from.location_name }}</td>
             <td class="text-center">{{ notification.going_to.location_name }}</td>
             <td class="text-center">{{ notification.date_of_departure }}</td>
