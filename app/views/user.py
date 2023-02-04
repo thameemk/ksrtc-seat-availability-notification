@@ -3,9 +3,8 @@
 #  Author : thameem
 #  Current modification time : Mon, 23 May 2022 at 12:05 AM India Standard Time
 #  Last modified time : Mon, 23 May 2022 at 12:05 AM India Standard Time
-import threading
-import uuid
 import datetime
+import uuid
 
 from beartype import beartype
 from django.contrib import messages
@@ -50,6 +49,7 @@ class User:
 
         _notification_obj = NotificationModel(
             notification_id=uuid.uuid4().hex,
+            trip_name=request.POST['trip_name'],
             leaving_from=leaving_from,
             going_to=going_to,
             date_of_departure=date_of_departure,
@@ -57,21 +57,22 @@ class User:
                 'date_of_return'] else None,
             user=user,
             available_seats=0,
-            time_interval=int(request.POST['time_interval']),
+            time_interval=int(request.POST['time_interval']) if request.POST['time_interval'] else 30,
         )
 
         notification = NotificationModel.save_notification(_notification_obj)
 
-        threading.Thread(target=User._update_available_seats, args=(notification,
-                                                                    notification.leaving_from.location_id,
-                                                                    notification.going_to.location_id,
-                                                                    notification.date_of_departure.date()))
+        User._update_available_seats(notification,
+                                     notification.leaving_from.location_id,
+                                     notification.going_to.location_id,
+                                     notification.date_of_departure.date())
         if notification:
-            messages.success(request, 'Request in progress, please refresh the page to know the available seats')
+            messages.success(request,
+                             'Success! New notification added for trip {trip_name}')
+            return redirect('/user/notifications/')
         else:
-            messages.error(request, 'Some sort of error has occurred.')
-
-        return redirect('/user/add_notification')
+            messages.error(request, 'Error! Some sort of error has occurred.')
+            return redirect('/user/add_notification')
 
     @staticmethod
     @beartype
@@ -102,12 +103,13 @@ class User:
         notification_obj = NotificationModel.get_notification(request.session['user'], notification_id)
 
         if notification_obj:
-            threading.Thread(target=User._update_available_seats, args=(notification_obj,
-                                                                        notification_obj.leaving_from.location_id,
-                                                                        notification_obj.going_to.location_id,
-                                                                        notification_obj.date_of_departure.date()))
-            messages.success(request, 'Request in progress, please refresh the page to know the available seats')
+            User._update_available_seats(notification_obj,
+                                         notification_obj.leaving_from.location_id,
+                                         notification_obj.going_to.location_id,
+                                         notification_obj.date_of_departure.date())
+
+            messages.success(request, 'Success! Updated seat for trip {trip_name}')
         else:
-            messages.error(request, 'Some sort of error has occurred.')
+            messages.error(request, 'Error! Some sort of error has occurred.')
 
         return redirect('/user/notifications/')
